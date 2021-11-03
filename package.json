@@ -1,0 +1,9 @@
+{
+  "name": "mvc-template",
+  "description": "Pastel designs mvc template",
+  "license": "proprietary",
+  "version": "1.0.0",
+  "dependencies": {
+    "nette-forms": "^3.1.0"
+  }
+}
