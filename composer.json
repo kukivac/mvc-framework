@@ -1,0 +1,35 @@
+{
+  "name": "pastel-design/mvc-template",
+  "description": "Pastel designs mvc template",
+  "type": "framework",
+  "license": "proprietary",
+  "minimum-stability": "stable",
+  "require": {
+    "php": "8.* ",
+    "intervention/image": "2.*",
+    "latte/latte": "v2.*",
+    "nette/forms": "v3.*",
+    "ext-pdo": "*",
+    "ext-fileinfo": "*",
+    "ext-json": "*",
+    "ext-intl": "*",
+    "guzzlehttp/guzzle": "^7.0",
+    "ext-mbstring": "*"
+  },
+  "authors": [
+    {
+      "name": "Jakub Kováč",
+      "email": "kukivac@gmail.com"
+    },
+    {
+      "name": "Vojtěch Makula",
+      "email": "makulvo@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "app\\": "app",
+      "system\\": "system"
+    }
+  }
+}
