@@ -14,7 +14,8 @@
     "ext-json": "*",
     "ext-intl": "*",
     "guzzlehttp/guzzle": "^7.0",
-    "ext-mbstring": "*"
+    "ext-mbstring": "*",
+    "tracy/tracy": "^2.10"
   },
   "authors": [
     {
