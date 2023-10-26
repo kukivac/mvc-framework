@@ -5,7 +5,8 @@ namespace System\Core\Controllers;
 use Latte\Engine;
 use System\Core\AbstractController;
 use System\Core\Exceptions\ControllerException;
-use System\Core\Helpers\Enviroment;
+use system\core\helpers\Debug;
+use System\Core\Helpers\Environment;
 use System\Core\PageHead\PageHead;
 use Throwable;
 
@@ -56,8 +57,8 @@ abstract class ViewController extends AbstractController
                 $this->latte->render($this->view, $this->data);
             }
         } catch (Throwable $exception) {
-            if(Enviroment::getSystemEnviroment()===Enviroment::DEV_ENVIROMENT){
-                dd($exception);
+            if (Environment::getSystemEnvironment() === Environment::DEV_ENVIROMENT) {
+                Debug::dumpAndExit($exception);
             }
             throw new ControllerException("View file not selected");
         }

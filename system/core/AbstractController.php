@@ -11,18 +11,20 @@ use Transliterator;
  */
 abstract class AbstractController
 {
-    /**
-     * @var string $controllerName
-     */
+    /** @var string */
     protected string $controllerName;
+
+    /** @var bool */
+    protected bool $active;
 
     /**
      * Controller constructor.
      *
      * @param bool $active
      */
-    public function __construct(protected bool $active = true)
+    public function __construct(bool $active = true)
     {
+        $this->active = $active;
     }
 
     /**
