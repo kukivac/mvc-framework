@@ -8,8 +8,15 @@ use JetBrains\PhpStorm\NoReturn;
 
 class Debug
 {
-    public static function dump()
+    /**
+     * @param mixed $variables
+     * @return void
+     */
+    public static function dump(...$variables): void
     {
+        echo '<pre>';
+        var_dump(...$variables);
+        echo '</pre>';
     }
 
     /**
