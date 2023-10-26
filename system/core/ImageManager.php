@@ -1,20 +1,19 @@
 <?php
 
-namespace system\core;
+namespace System\Core;
 
 include_once("../vendor/autoload.php");
 
-use app\config\ImageOptimizerConfig;
-use Intervention\Image\ImageManagerStatic as Image;
+use App\Config\ImageOptimizerConfig;
 use Intervention\Image\Exception\NotWritableException;
+use Intervention\Image\ImageManagerStatic as Image;
 use RuntimeException;
-
 
 /**
  * Manager ImageManager
  * pro více info http://image.intervention.io/getting_started/introduction
  *
- * @package app\models
+ * @package App\models
  */
 class ImageManager
 {
@@ -23,13 +22,13 @@ class ImageManager
      *
      * @param string $imgURL
      *
-     * @throws RuntimeException
      * @return void
+     * @throws RuntimeException
      */
     static function defaultImage(string $imgURL): void
     {
         try {
-            self::editImage($imgURL,$imgURL,ImageOptimizerConfig::$defaultImageWidth,ImageOptimizerConfig::$defaultImageHeight);
+            self::editImage($imgURL, $imgURL, ImageOptimizerConfig::$defaultImageWidth, ImageOptimizerConfig::$defaultImageHeight);
         } catch (NotWritableException $ex) {
             throw new RuntimeException;
         }
@@ -40,15 +39,15 @@ class ImageManager
      *
      * @param string $imgURL
      *
-     * @throws RuntimeException
      * @return void
+     * @throws RuntimeException
      */
-    static function makeThumbnail(string $imgURL) :void
+    static function makeThumbnail(string $imgURL): void
     {
         $newURL = "images/thumbnail/" . array_reverse(explode("/", $imgURL))[0];
         $oldURL = $imgURL;
         try {
-            self::editImage($newURL,$oldURL,ImageOptimizerConfig::$thumbnailWidth,ImageOptimizerConfig::$thumbnailHeight);
+            self::editImage($newURL, $oldURL, ImageOptimizerConfig::$thumbnailWidth, ImageOptimizerConfig::$thumbnailHeight);
         } catch (NotWritableException $ex) {
             throw new RuntimeException;
         }
@@ -60,7 +59,7 @@ class ImageManager
      * @param $targetWidth
      * @param $targetHeight
      */
-    static function editImage($newURL,$oldURL,$targetWidth,$targetHeight)
+    static function editImage($newURL, $oldURL, $targetWidth, $targetHeight)
     {
         $img = Image::make($oldURL);
 
@@ -75,8 +74,7 @@ class ImageManager
             } else {
                 $img->save($newURL);
             }
-        }
-        //na výšku
+        } //na výšku
         else {
             if ($height > $targetHeight) {
                 $img->resize(null, $targetHeight, function ($constraint) {

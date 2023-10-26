@@ -1,11 +1,9 @@
 <?php
 
+namespace System\Core;
 
-namespace system\core;
-
-
-use RuntimeException;
 use Nette\Http\FileUpload as FileUpload;
+use RuntimeException;
 
 class UploadManager
 {
@@ -16,8 +14,8 @@ class UploadManager
      */
     public static function UploadMultipleImages($values): array|bool
     {
-        $filenames = array();
-        $sanitizedFileNames = array();
+        $filenames = [];
+        $sanitizedFileNames = [];
         try {
             foreach ($values as $file) {
                 /**
@@ -53,8 +51,10 @@ class UploadManager
                     unlink("images/thumbnail/" . $filename);
                 }
             }
+
             return false;
         }
+
         return ["filenames" => $filenames, "sanitizedFileNames" => $sanitizedFileNames];
     }
 
@@ -92,10 +92,12 @@ class UploadManager
             }
             ImageManager::defaultImage($filenameWDir);
             ImageManager::makeThumbnail($filenameWDir);
+
             return ["filename" => $filename, "sanitizedFileName" => $sanitizedFileName];
         } catch (RuntimeException) {
             @unlink("images/fullView/" . $filename);
             @unlink("images/thumbnail/" . $filename);
+
             return false;
         }
     }

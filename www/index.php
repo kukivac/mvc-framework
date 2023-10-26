@@ -1,9 +1,9 @@
 <?php
 ini_set('memory_limit', '-1');
 
-use system\core\exceptions\ControllerException;
-use system\core\exceptions\RoutesException;
-use system\core\Routes\Router;
+use System\Core\Exceptions\ControllerException;
+use System\Core\Exceptions\RoutesException;
+use System\Core\Routes\Router;
 
 //@todo remove on webserver
 /*

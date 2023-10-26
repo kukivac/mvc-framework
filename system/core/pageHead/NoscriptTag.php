@@ -1,6 +1,6 @@
 <?php
 
-namespace system\core\pageHead;
+namespace System\Core\PageHead;
 
 class NoscriptTag
 {
@@ -15,6 +15,6 @@ class NoscriptTag
 
     public function render(): string
     {
-        return "<noscript>".$this->noscript."</noscript>";
+        return "<noscript>" . $this->noscript . "</noscript>";
     }
 }

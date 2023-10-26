@@ -1,23 +1,23 @@
 <?php
 
-namespace system\core;
+namespace System\Core;
 
-use Nette\Forms\Form;
 use Nette\Forms\Controls\Checkbox as Checkbox;
+use Nette\Forms\Form;
 
 /**
  * Form FormFactory
  *
- * @package app\forms
+ * @package App\forms
  */
 abstract class FormFactory
 {
-
     protected function getForm(string $name): Form
     {
         $form = new Form($name);
         $renderer = $form->getRenderer();
         $renderer->wrappers["controls"]["container"] = null;
+
         return $form;
     }
 
@@ -48,13 +48,10 @@ abstract class FormFactory
             if ($type === 'button') {
                 $control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-secondary');
                 $usedPrimary = true;
-
             } elseif (in_array($type, ['text', 'textarea', 'select'], true)) {
                 $control->getControlPrototype()->addClass('form-control');
-
             } elseif ($type === 'file') {
                 $control->getControlPrototype()->addClass('form-control-file');
-
             } elseif (in_array($type, ['checkbox', 'radio'], true)) {
                 if ($control instanceof Checkbox) {
                     $control->getLabelPrototype()->addClass('form-check-label');
@@ -65,6 +62,7 @@ abstract class FormFactory
                 $control->getSeparatorPrototype()->setName('div')->addClass('form-check');
             }
         }
+
         return $form;
     }
 
@@ -76,5 +74,4 @@ abstract class FormFactory
      * @return Form
      */
     abstract function create(callable $onSuccess): Form;
-
 }

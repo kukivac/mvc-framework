@@ -1,10 +1,9 @@
 <?php
 
-namespace system\core\pageHead;
+namespace System\Core\PageHead;
 
 class StyleTag
 {
-
     /**
      * StyleTag constructor.
      *
@@ -19,6 +18,6 @@ class StyleTag
      */
     public function render(): string
     {
-        return "<link rel=\"stylesheet\" href=\"" . $this->style . "?v=".time()."\" type=\"text/css\">\n";
+        return "<link rel=\"stylesheet\" href=\"" . $this->style . "?v=" . time() . "\" type=\"text/css\">\n";
     }
 }

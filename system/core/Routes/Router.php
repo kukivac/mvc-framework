@@ -1,21 +1,20 @@
 <?php
 
-namespace system\core\Routes;
+namespace System\Core\Routes;
 
 require(__DIR__ . "/../../../vendor/autoload.php");
 
-use app\config\ControllerTypesConfig;
-use JetBrains\PhpStorm\ArrayShape;
+use App\Config\ControllerTypesConfig;
 use JetBrains\PhpStorm\NoReturn;
-use system\core\AbstractController;
-use system\core\exceptions\RoutesException;
-use system\database\Database;
 use PDOException;
+use System\Core\AbstractController;
+use System\Core\Exceptions\RoutesException;
+use System\Database\Database;
 
 /**
  * Router
  *
- * @package app\router
+ * @package App\router
  */
 final class Router
 {
@@ -23,7 +22,9 @@ final class Router
      * @var AbstractController $data
      */
     private AbstractController $controller;
+
     private array $parameters;
+
     private array $query;
 
     /**
@@ -46,7 +47,7 @@ final class Router
         $controllerName = $this->dashToCamel(array_shift($this->parameters));
         /* Controller class init */
         if (file_exists('../app/controllers/' . $controllerName . 'Controller.php')) {
-            $controllerClass = "\app\controllers\\" . $controllerName . 'Controller';
+            $controllerClass = "\app\Controllers\\" . $controllerName . 'Controller';
             $this->controller = new $controllerClass;
         } else {
             $this->reroute('error/404');
@@ -71,7 +72,7 @@ final class Router
         $parsedURL = ltrim($url["path"], "/");
         $parsedURL = trim($parsedURL);
         $parsedURL = explode("/", $parsedURL);
-        $parameters = array();
+        $parameters = [];
         foreach ($parsedURL as $parse) {
             if ($parse !== '') {
                 $parameters[] = $parse;
@@ -83,7 +84,7 @@ final class Router
             array_unshift($parameters, "default");
         }
         $this->setParameters($parameters);
-        $query = array();
+        $query = [];
         if (isset($url["query"])) {
             parse_str($url["query"], $query);
         }
@@ -102,7 +103,7 @@ final class Router
 
     /**
      * @param string $url
-     * @param array  $parameters
+     * @param array $parameters
      *
      * @return void
      */
@@ -166,6 +167,7 @@ final class Router
     {
         try {
             new Database();
+
             return true;
         } catch
         (PDOException) {

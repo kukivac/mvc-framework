@@ -1,13 +1,13 @@
 <?php
 
-namespace app\controllers;
+namespace App\Controllers;
 
-use system\core\controllers\ViewController;
+use System\Core\Controllers\ViewController;
 
 /**
  * Controller ErrorController
  *
- * @package app\controllers
+ * @package App\Controllers
  */
 class ErrorController extends ViewController
 {
@@ -19,7 +19,7 @@ class ErrorController extends ViewController
     /**
      * Sets view by error code
      *
-     * @param array      $params
+     * @param array $params
      * @param array|null $query
      *
      * @return void

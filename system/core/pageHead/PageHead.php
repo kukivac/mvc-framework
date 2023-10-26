@@ -1,16 +1,21 @@
 <?php
 
-namespace system\core\pageHead;
+namespace System\Core\PageHead;
 
 class PageHead
 {
-
     private array $metas;
+
     private array $icons;
+
     private array $scripts;
+
     private TitleTag $title;
+
     private NoscriptTag $noscript;
+
     private array $styles;
+
     public string $resultHead;
 
     public function __construct()
@@ -25,8 +30,8 @@ class PageHead
     /**
      * Adds meta tags to the page head
      *
-     * @param string $name     Meta property name
-     * @param string $content  Meta property content
+     * @param string $name Meta property name
+     * @param string $content Meta property content
      * @param string $nameProp Optional meta property, default "name"
      *
      * @return void
@@ -39,8 +44,8 @@ class PageHead
     /**
      * Adds icons to the page head
      *
-     * @param string      $rel  Icon relation type
-     * @param string      $href Icon link
+     * @param string $rel Icon relation type
+     * @param string $href Icon link
      * @param string|null $type Icon type
      */
     public function addIcon(string $rel, string $href, string $type = null): void
@@ -62,7 +67,7 @@ class PageHead
      * Adds script to page head
      *
      * @param string $script Scripts link
-     * @param string $async  Async or defer attribute
+     * @param string $async Async or defer attribute
      */
     public function addScript(string $script, string $async = ""): void
     {
@@ -115,6 +120,7 @@ class PageHead
         if (isset($this->noscript)) {
             $this->resultHead .= $this->noscript->render();
         }
+
         return $this->resultHead;
     }
 }

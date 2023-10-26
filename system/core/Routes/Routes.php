@@ -1,16 +1,12 @@
 <?php
 
-
-namespace system\core\Routes;
-
+namespace System\Core\Routes;
 
 use Exception;
-use system\core\exceptions\RoutesException;
+use System\Core\Exceptions\RoutesException;
 
 class Routes
 {
-
-
     /**
      * @param mixed $parameter
      *
@@ -20,10 +16,11 @@ class Routes
     public static function tryRoute(mixed $parameter): bool|array
     {
         try {
-            $routes = new \app\config\Routes();
-        }catch (Exception){
+            $routes = new \app\Config\Routes();
+        } catch (Exception) {
             return false;
         }
+
         return $routes->getRoutes($parameter);
     }
 }

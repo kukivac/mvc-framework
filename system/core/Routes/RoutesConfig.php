@@ -1,10 +1,8 @@
 <?php
 
+namespace System\Core\Routes;
 
-namespace system\core\Routes;
-
-
-use system\core\exceptions\RoutesException;
+use System\Core\Exceptions\RoutesException;
 
 class RoutesConfig
 {
@@ -13,6 +11,7 @@ class RoutesConfig
     }
 
     protected array $routes;
+
     private mixed $result;
 
     /**
@@ -21,14 +20,15 @@ class RoutesConfig
      * @return bool|array
      * @throws RoutesException
      */
-    public function getRoutes($needle):bool|array
+    public function getRoutes($needle): bool|array
     {
         $this->sanitizeConfig();
         if (isset($this->routes[$needle])) {
             $this->setResult($this->routes[$needle]);
             $this->validateResult();
+
             return $this->getResult();
-        }else{
+        } else {
             return false;
         }
     }
@@ -37,11 +37,11 @@ class RoutesConfig
      * @return void
      * @throws RoutesException
      */
-    private function sanitizeConfig():void
+    private function sanitizeConfig(): void
     {
-        foreach ($this->routes as $key => $route){
+        foreach ($this->routes as $key => $route) {
             $pattern = "[a-Z]";
-            if(preg_match($pattern,$key)){
+            if (preg_match($pattern, $key)) {
                 unset($this->routes[$key]);
             }
             if (file_exists('../app/controllers/' . $key . 'Controller.php')) {
@@ -61,13 +61,13 @@ class RoutesConfig
     /**
      * @throws RoutesException
      */
-    private function validateResult():void
+    private function validateResult(): void
     {
-        if(!is_array($this->result)){
+        if (!is_array($this->result)) {
             throw new RoutesException("Route is not properly defined");
         }
-        foreach ($this->result as $item){
-            if(!is_string($item)){
+        foreach ($this->result as $item) {
+            if (!is_string($item)) {
                 throw new RoutesException("Route is not properly defined");
             }
         }
@@ -80,5 +80,4 @@ class RoutesConfig
     {
         return $this->result;
     }
-
 }
