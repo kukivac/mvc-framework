@@ -33,16 +33,9 @@ class Database
      */
     public function __construct()
     {
-        /**
-         * @var string $host
-         * @var string $username
-         * @var string $password
-         * @var string $database
-         * @var array $options
-         */
-        extract(Credentials::returnConfig());
-        $dsn = "mysql:host=$host;dbname=$database";
-        $this->pdo = new PDO($dsn, $username, $password, $options);
+        $database_credentials = Credentials::returnConfig();
+        $dsn = "mysql:host=" . $database_credentials["host"] . "dbname=" . $database_credentials["database"];
+        $this->pdo = new PDO($dsn, $database_credentials["username"], $database_credentials["password"], $database_credentials["options"]);
         $this->params = [];
         $this->transactionBegan = false;
         $this->executed = false;
