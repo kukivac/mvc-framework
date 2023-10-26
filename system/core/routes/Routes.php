@@ -16,7 +16,7 @@ class Routes
     public static function tryRoute(mixed $parameter): bool|array
     {
         try {
-            $routes = new \app\Config\Routes();
+            $routes = new \App\Config\Routes();
         } catch (Exception) {
             return false;
         }

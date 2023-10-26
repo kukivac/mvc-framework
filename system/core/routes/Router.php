@@ -4,7 +4,6 @@ namespace System\Core\Routes;
 
 require(__DIR__ . "/../../../vendor/autoload.php");
 
-use App\Config\ControllerTypesConfig;
 use JetBrains\PhpStorm\NoReturn;
 use PDOException;
 use System\Core\AbstractController;
@@ -94,9 +93,9 @@ final class Router
     /**
      * @param string $text
      *
-     * @return string|string[]
+     * @return string
      */
-    private function dashToCamel(string $text): array|string
+    private function dashToCamel(string $text)
     {
         return str_replace(' ', '', ucwords(str_replace('-', ' ', $text)));
     }

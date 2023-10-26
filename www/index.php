@@ -1,6 +1,8 @@
 <?php
+
 ini_set('memory_limit', '-1');
 
+use JetBrains\PhpStorm\NoReturn;
 use System\Core\Exceptions\ControllerException;
 use System\Core\Exceptions\RoutesException;
 use System\Core\Routes\Router;
@@ -27,7 +29,7 @@ require("../vendor/autoload.php");
  * @param $class
  * Class for autoload
  */
-function autoloadFunction($class)
+function autoloadFunction($class): void
 {
     $classname = "./../" . str_replace("\\", "/", $class) . ".php";
     if (is_readable($classname)) {
@@ -36,13 +38,21 @@ function autoloadFunction($class)
     }
 }
 
+#[NoReturn] function dd(...$variables): void
+{
+    echo '<pre>';
+    var_dump(...$variables);
+    echo '</pre>';
+    die();
+}
+
 spl_autoload_register("autoloadFunction");
 session_start();
 $router = new Router();
 try {
-    $router->process(array($_SERVER['REQUEST_URI']));
-} catch (ControllerException | RoutesException $e) {
-    if($env =="dev"){
+    $router->process([$_SERVER['REQUEST_URI']]);
+} catch (ControllerException|RoutesException $e) {
+    if ($env == "dev") {
         echo $e->getMessage();
     }
     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);

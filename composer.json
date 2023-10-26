@@ -31,5 +31,20 @@
       "app\\": "app",
       "system\\": "system"
     }
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.10",
+    "jetbrains/phpstorm-attributes": "^1.0"
+  },
+  "scripts": {
+    "cs-check": "ecs check --memory-limit=-1",
+    "cs-fix": [
+      "ecs check --fix --memory-limit=-1"
+    ],
+    "stan": [
+      "phpstan --configuration=ci/phpstan.neon.dist --memory-limit=-1"
+    ],"stan-baseline": [
+      "phpstan --configuration=ci/phpstan.neon.dist --memory-limit=-1 --generate-baseline"
+    ]
   }
 }
