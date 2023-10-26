@@ -1,10 +1,9 @@
 <?php
 
-namespace system\core\pageHead;
+namespace System\Core\PageHead;
 
 class MetaTag
 {
-
     /**
      * MetaTag constructor.
      *
@@ -21,6 +20,6 @@ class MetaTag
      */
     public function render(): string
     {
-        return "<meta ".$this->nameProp."=\"".$this->name."\" content=\"".$this->content."\">\n";
+        return "<meta " . $this->nameProp . "=\"" . $this->name . "\" content=\"" . $this->content . "\">\n";
     }
 }

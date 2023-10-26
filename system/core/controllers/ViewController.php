@@ -1,13 +1,11 @@
 <?php
 
-
-namespace system\core\controllers;
-
+namespace System\Core\Controllers;
 
 use Latte\Engine;
-use system\core\AbstractController;
-use system\core\exceptions\ControllerException;
-use system\core\pageHead\PageHead;
+use System\Core\AbstractController;
+use System\Core\Exceptions\ControllerException;
+use System\Core\PageHead\PageHead;
 use Throwable;
 
 abstract class ViewController extends AbstractController
@@ -26,6 +24,7 @@ abstract class ViewController extends AbstractController
      * @var PageHead $head
      */
     protected PageHead $head;
+
     /**
      * @var Engine $latte
      * Variable for class Latte\Engine object

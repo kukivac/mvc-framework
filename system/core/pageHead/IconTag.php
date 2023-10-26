@@ -1,16 +1,15 @@
 <?php
 
-namespace system\core\pageHead;
+namespace System\Core\PageHead;
 
 class IconTag
 {
-
     /**
      * IconTag constructor.
      *
-     * @param string      $rel
+     * @param string $rel
      * @param string|null $type
-     * @param string      $href
+     * @param string $href
      */
     public function __construct(protected string $rel, protected ?string $type, protected string $href)
     {
@@ -21,6 +20,6 @@ class IconTag
      */
     public function render(): string
     {
-        return "<link rel=\"".$this->rel."\" type=\"".$this->type."\" href=\"".$this->href."\">\n";
+        return "<link rel=\"" . $this->rel . "\" type=\"" . $this->type . "\" href=\"" . $this->href . "\">\n";
     }
 }

@@ -1,17 +1,16 @@
 <?php
 
-namespace system\core;
+namespace System\Core;
 
 use Transliterator;
 
 /**
  * Class Controller
  *
- * @package app\controllers
+ * @package App\Controllers
  */
 abstract class AbstractController
 {
-
     /**
      * @var string $controllerName
      */
@@ -29,7 +28,7 @@ abstract class AbstractController
     /**
      * Definition of process function for inheritance
      *
-     * @param array      $params
+     * @param array $params
      * Main url parameters
      * @param array|null $query
      * Get parameters from url
@@ -39,7 +38,7 @@ abstract class AbstractController
     /**
      * Definition of process function for inheritance
      *
-     * @param array      $parameters
+     * @param array $parameters
      * @param array|null $query
      */
     abstract function build(array $parameters, array $query = null);
@@ -78,6 +77,7 @@ abstract class AbstractController
     public function basicToDash(string $argument): string
     {
         $transliterator = Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: Lower(); :: NFC;', Transliterator::FORWARD);
+
         return preg_replace("[\W+]", "-", $transliterator->transliterate($argument));
     }
 }

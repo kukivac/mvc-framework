@@ -1,20 +1,31 @@
 <?php
 
-namespace system\database;
+namespace System\Database;
 
-use app\config\DbConfig as Credentials;
+use App\Config\DbConfig as Credentials;
 use JetBrains\PhpStorm\Pure;
 use PDO;
 use PDOStatement;
-use system\core\exceptions\DatabaseException;
+use System\Core\Exceptions\DatabaseException;
 
 class Database
 {
+    /** @var PDO */
     private PDO $pdo;
+
+    /** @var array */
     private array $params;
+
+    /** @var string */
     private string $query;
+
+    /** @var PDOStatement */
     public PDOStatement $statement;
+
+    /** @var bool */
     private bool $transactionBegan;
+
+    /** @var bool */
     private bool $executed;
 
     /**
@@ -27,12 +38,12 @@ class Database
          * @var string $username
          * @var string $password
          * @var string $database
-         * @var array  $options
+         * @var array $options
          */
         extract(Credentials::returnConfig());
         $dsn = "mysql:host=$host;dbname=$database";
         $this->pdo = new PDO($dsn, $username, $password, $options);
-        $this->params=[];
+        $this->params = [];
         $this->transactionBegan = false;
         $this->executed = false;
     }
@@ -53,7 +64,6 @@ class Database
         $this->prepareStatement($this->pdo->prepare($this->query));
     }
 
-
     /**
      * @param ...$parameters
      *
@@ -70,6 +80,7 @@ class Database
         }
         $executed = $this->statement->execute($this->params);
         $this->setExecuted();
+
         return $executed;
     }
 
@@ -87,6 +98,7 @@ class Database
         if ($this->statementExecuted()) {
             $this->execute();
         }
+
         return $this->statement->fetch();
     }
 
@@ -104,6 +116,7 @@ class Database
         if ($this->statementExecuted()) {
             $this->execute();
         }
+
         return $this->statement->fetchAll();
     }
 
@@ -116,9 +129,9 @@ class Database
     public function fetchCell(...$params): mixed
     {
         $this->setFetchMode(PDO::FETCH_NUM);
+
         return ($this->fetchRow(...$params)[0]);
     }
-
 
     /**
      * @param string $query
@@ -141,7 +154,7 @@ class Database
     }
 
     /**
-     * @param int   $fetchMode
+     * @param int $fetchMode
      * @param mixed ...$params
      *
      * @return void

@@ -1,8 +1,8 @@
 <?php
 
-namespace app\config;
+namespace App\Config;
 
-use system\core\Routes\RoutesConfig;
+use System\Core\Routes\RoutesConfig;
 
 class Routes extends RoutesConfig
 {

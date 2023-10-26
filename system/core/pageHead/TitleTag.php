@@ -1,10 +1,9 @@
 <?php
 
-namespace system\core\pageHead;
+namespace System\Core\PageHead;
 
 class TitleTag
 {
-
     public function __construct(protected string $title)
     {
     }

@@ -1,13 +1,13 @@
 <?php
 
-namespace app\controllers;
+namespace App\Controllers;
 
-use system\core\controllers\ViewController;
+use System\Core\Controllers\ViewController;
 
 /**
  * Controller DefaultController
  *
- * @package app\controllers
+ * @package App\Controllers
  */
 class DefaultController extends ViewController
 {
@@ -19,7 +19,7 @@ class DefaultController extends ViewController
     /**
      * Sets default homepage
      *
-     * @param array      $params
+     * @param array $params
      * @param array|null $query
      *
      * @return void
