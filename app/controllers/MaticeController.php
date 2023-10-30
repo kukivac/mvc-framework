@@ -16,15 +16,7 @@ class MaticeController extends ViewController
         parent::__construct();
     }
 
-    /**
-     * Sets default homepage
-     *
-     * @param string[] $parameters
-     * @param mixed[]|null $query
-     *
-     * @return void
-     */
-    public function process(array $parameters, array $query = null):void
+    public function getContentDefault()
     {
         $numbers = range(0, 1000);
         shuffle($numbers);

@@ -8,19 +8,16 @@ use system\core\exceptions\RoutesException;
 class Routes
 {
     /**
-     * @param string $parameter
-     *
-     * @return string[]|false
+     * @param string[] $parameters
+     * @return Route
      * @throws RoutesException
      */
-    public static function tryRoute(string $parameter): false|array
+    public static function findRoute(array $parameters): Route
     {
-        try {
-            $routes = new \app\config\Routes();
-        } catch (Exception $exception) {
-            return false;
-        }
+        $routes = new \app\config\Routes();
 
-        return $routes->getRoutes($parameter);
+        //        $routes->sanitizeConfig();
+
+        return $routes->getRoute($parameters);
     }
 }

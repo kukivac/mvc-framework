@@ -38,13 +38,6 @@ abstract class ViewController extends AbstractController
     }
 
     /**
-     * @param string[] $parameters
-     * @param mixed[]|null $query
-     * @return void
-     */
-    abstract function process(array $parameters, array $query = null): void;
-
-    /**
      * Renders selected view
      *
      * @return void
@@ -83,14 +76,11 @@ abstract class ViewController extends AbstractController
     }
 
     /**
-     * @param string[] $parameters
-     * @param mixed[]|null $query
      * @return void
      * @throws ControllerException
      */
-    public function build(array $parameters, array $query = null): void
+    public function build(): void
     {
-        $this->process($parameters, $query);
         $this->writeView();
     }
 }

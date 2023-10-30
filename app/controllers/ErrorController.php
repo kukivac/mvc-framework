@@ -17,39 +17,6 @@ class ErrorController extends ViewController
         parent::__construct();
     }
 
-    /**
-     * Sets view by error code
-     *
-     * @param string[] $parameters
-     * @param mixed[]|null $query
-     *
-     * @return void
-     * @throws ControllerException
-     */
-    public function process(array $parameters, array $query = null): void
-    {
-        if (isset($parameters[0])) {
-            $errorCode = $parameters[0];
-            $file = "../app/views/Error/" . $errorCode . ".latte";
-            $errorCode = is_file($file) ? $errorCode : "400";
-
-            $methodName = "error" . $errorCode;
-            $callable = ["app\\Controllers\\ErrorController", $methodName];
-
-            if (is_callable($callable)) {
-                call_user_func($callable);
-            } else {
-                throw new ControllerException("Method " . $methodName . " of class app\\Controllers\\ErrorController is not callable");
-            }
-        } else {
-            $errorCode = "404";
-        }
-        $this->head->addMeta("description", "Error occured");
-        $this->head->addMeta("keywords", "error");
-        $this->head->addTitle("Error " . $errorCode);
-        $this->setView($errorCode);
-    }
-
     public function error400(): void
     {
         $this->head->addMeta("description", "Bad request");

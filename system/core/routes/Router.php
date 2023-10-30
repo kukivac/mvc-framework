@@ -9,7 +9,6 @@ use PDOException;
 use system\core\AbstractController;
 use system\core\exceptions\ControllerException;
 use system\core\exceptions\RoutesException;
-use system\core\helpers\Format;
 use system\database\Database;
 use Tracy\Debugger;
 
@@ -34,7 +33,6 @@ final class Router
     /**
      * @param string $request_uri
      *
-     * @throws RoutesException
      * @throws ControllerException
      */
     public function process(string $request_uri): void
@@ -44,33 +42,24 @@ final class Router
         /* URL Parsing */
         $this->parseURL($request_uri);
         /** Try custom routes */
-        $routesResult = Routes::tryRoute($this->parameters[0]);
-        if (Format::isArrayOfStrings($routesResult)) {
-            /** @var string[] $routesResult */
-            $this->insertNewRoute($routesResult);
+        try {
+            $route = Routes::findRoute($this->parameters);
+        } catch (RoutesException) {
+            $this->process("error/404");
+            exit();
         }
-
-        $dashControllerName = array_shift($this->parameters);
-        if ($dashControllerName === null) {
-            throw new ControllerException("There isnt any parameter in parameters array");
-        }
-        /* Controller name init */
-        $controllerName = $this->dashToCamel($dashControllerName);
-        /* Controller class init */
-        if (file_exists('../app/controllers/' . $controllerName . 'Controller.php')) {
-            $controllerClassName = "\app\controllers\\" . $controllerName . 'Controller';
-            /** @var AbstractController $controllerClass */
-            $controllerClass = new $controllerClassName;
-            $this->controller = $controllerClass;
-        } else {
-            $this->reroute('error/404');
-        }
-        /* Controller preparing*/
-        $this->controller->setControllerName($controllerName);
+        $controllerName = $route->getControllerName();
+        /** @var AbstractController $controllerClass */
+        $controllerClass = new $controllerName;
+        $this->controller = $controllerClass;
+        $this->controller->setControllerName(str_replace("Controller", "", array_reverse(explode("\\", $controllerName))[0]));
+        $request = ["jhaha" => "jfšf"];
         if ($this->controller->isActive()) {
-            $this->controller->build($this->parameters, $this->query);
+            call_user_func([$controllerClass, $route->getControllerMethod()], $request);
+            $this->controller->build();
         } else {
-            $this->reroute("default");
+            $this->process("/");
+            exit();
         }
     }
 
@@ -97,8 +86,8 @@ final class Router
                 break;
             }
         }
-        if (empty($parameters[0])) {
-            array_unshift($parameters, "default");
+        if (count($parameters) === 0) {
+            array_unshift($parameters, "/");
         }
         $this->setParameters($parameters);
         $query = [];
@@ -190,14 +179,5 @@ final class Router
         (PDOException) {
             return false;
         }
-    }
-
-    /**
-     * @param string[] $routesResult
-     * @return void
-     */
-    private function insertNewRoute(array $routesResult)
-    {
-        $this->setParameters($routesResult);
     }
 }
