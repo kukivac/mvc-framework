@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controllers;
+namespace app\controllers;
 
-use System\Core\Controllers\ViewController;
+use system\core\controllers\ViewController;
 
 /**
  * Controller ErrorController
  *
- * @package App\Controllers
+ * @package app\controllers
  */
 class ErrorController extends ViewController
 {
@@ -30,7 +30,7 @@ class ErrorController extends ViewController
             $errorCode = $params[0];
             $file = "../app/views/Error/" . $errorCode . ".latte";
             $errorCode = is_file($file) ? $errorCode : "400";
-            call_user_func(["App\\Controllers\\ErrorController", "error" . $errorCode]);
+            call_user_func(["app\\Controllers\\ErrorController", "error" . $errorCode]);
         } else {
             $errorCode = "404";
         }

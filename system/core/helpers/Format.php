@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace System\Core\Helpers;
+namespace system\core\helpers;
 
 class Format
 {

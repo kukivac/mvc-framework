@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Core;
+namespace system\core;
 
 use Nette\Forms\Controls\Checkbox as Checkbox;
 use Nette\Forms\Form;
@@ -8,7 +8,7 @@ use Nette\Forms\Form;
 /**
  * Form FormFactory
  *
- * @package App\forms
+ * @package app\forms
  */
 abstract class FormFactory
 {

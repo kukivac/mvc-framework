@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Core\Exceptions;
+namespace system\core\exceptions;
 
 use Exception;
 use JetBrains\PhpStorm\Pure;

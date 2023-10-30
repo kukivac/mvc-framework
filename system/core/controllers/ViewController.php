@@ -1,11 +1,11 @@
 <?php
 
-namespace System\Core\Controllers;
+namespace system\core\controllers;
 
 use Latte\Engine;
-use System\Core\AbstractController;
-use System\Core\Exceptions\ControllerException;
-use System\Core\PageHead\PageHead;
+use system\core\AbstractController;
+use system\core\exceptions\ControllerException;
+use system\core\pageHead\PageHead;
 
 abstract class ViewController extends AbstractController
 {

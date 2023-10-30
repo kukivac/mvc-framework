@@ -1,14 +1,14 @@
 <?php
 
-namespace System\Core;
+namespace system\core;
 
-use System\Core\Exceptions\ControllerException;
+use system\core\exceptions\ControllerException;
 use Transliterator;
 
 /**
  * Class Controller
  *
- * @package App\Controllers
+ * @package app\controllers
  */
 abstract class AbstractController
 {

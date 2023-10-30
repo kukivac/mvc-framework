@@ -1,9 +1,9 @@
 <?php
 
-namespace System\Core\Controllers;
+namespace system\core\controllers;
 
 use JetBrains\PhpStorm\Pure;
-use System\Core\AbstractController;
+use system\core\AbstractController;
 
 abstract class DataController extends AbstractController
 {

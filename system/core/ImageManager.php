@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Core;
+namespace system\core;
 
 include_once("../vendor/autoload.php");
 
-use App\Config\ImageOptimizerConfig;
+use app\config\ImageOptimizerConfig;
 use Intervention\Image\Exception\NotWritableException;
 use Intervention\Image\ImageManagerStatic as Image;
 use RuntimeException;
@@ -13,7 +13,7 @@ use RuntimeException;
  * Manager ImageManager
  * pro více info http://image.intervention.io/getting_started/introduction
  *
- * @package App\models
+ * @package app\models
  */
 class ImageManager
 {
