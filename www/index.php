@@ -2,12 +2,15 @@
 
 ini_set('memory_limit', '-1');
 
-use System\Core\Exceptions\RoutesException;
-use system\core\helpers\Debug;
 use System\Core\Helpers\Environment;
+use system\core\helpers\SystemEnvironments;
 use System\Core\Routes\Router;
+use Tracy\Debugger;
 
 require("../vendor/autoload.php");
+
+Debugger::enable();
+Debugger::$logDirectory = __DIR__ . '\..\log';
 function autoloadFunction($class): void
 {
     $classname = "./../" . str_replace("\\", "/", $class) . ".php";
@@ -19,12 +22,12 @@ function autoloadFunction($class): void
 
 spl_autoload_register("autoloadFunction");
 
-Environment::setSystemEnvironment("dev");
+Environment::setSystemEnvironment(SystemEnvironments::DEVELOPMENT);
 switch (Environment::getSystemEnvironment()) {
-    case Environment::DEV_ENVIROMENT:
+    case SystemEnvironments::DEVELOPMENT:
         ini_set('error_reporting', E_ALL);
         break;
-    case Environment::DEV_PRODUCTION:
+    case SystemEnvironments::PRODUCTION:
         if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off") {
             $redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
             header('HTTP/1.1 301 Moved Permanently');
@@ -39,11 +42,4 @@ mb_internal_encoding("UTF-8");
 session_start();
 
 $router = new Router();
-try {
-    $router->process([$_SERVER['REQUEST_URI']]);
-} catch (RoutesException|Exception $e) {
-    if (Environment::getSystemEnvironment() == Environment::DEV_ENVIROMENT) {
-        Debug::dumpAndExit($e);
-    }
-    header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-}
+$router->process([$_SERVER['REQUEST_URI']]);
