@@ -20,6 +20,7 @@ class Routes
         } catch (Exception $exception) {
             return false;
         }
+
         return $routes->getRoutes($parameter);
     }
 }

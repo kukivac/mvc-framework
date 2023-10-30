@@ -10,24 +10,24 @@ class RoutesConfig
     {
     }
 
-    /**
-     * @var mixed[]
-     */
+    /** @var string[][] */
     protected array $routes;
 
-    private mixed $result;
+    /** @var string[] */
+    private array $result;
 
     /**
-     * @param mixed $needle
+     * @param string $needle
      *
-     * @return mixed
+     * @return string[]|false
      * @throws RoutesException
      */
-    public function getRoutes(mixed $needle): mixed
+    public function getRoutes(string $needle): false|array
     {
         $this->sanitizeConfig();
-        if (isset($this->routes[$needle])) {
-            $this->setResult($this->routes[$needle]);
+        $custom_route = $this->getRoute($needle);
+        if ($custom_route !== null) {
+            $this->setResult($custom_route);
             $this->validateResult();
 
             return $this->getResult();
@@ -54,9 +54,9 @@ class RoutesConfig
     }
 
     /**
-     * @param mixed $result
+     * @param string[] $result
      */
-    public function setResult(mixed $result): void
+    public function setResult(array $result): void
     {
         $this->result = $result;
     }
@@ -77,10 +77,19 @@ class RoutesConfig
     }
 
     /**
-     * @return mixed
+     * @return string[]
      */
-    public function getResult(): mixed
+    public function getResult(): array
     {
         return $this->result;
+    }
+
+    /**
+     * @param string $needle
+     * @return string[]|null
+     */
+    public function getRoute(string $needle): ?array
+    {
+        return $this->routes[$needle] ?? null;
     }
 }
