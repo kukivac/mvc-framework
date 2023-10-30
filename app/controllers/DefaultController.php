@@ -16,23 +16,7 @@ class DefaultController extends ViewController
         parent::__construct();
     }
 
-    public function getContentDefault()
-    {
-        $this->head->addMeta("description", "Homepage of website");
-        $this->head->addMeta("keywords", "homepage,home");
-        $this->head->addTitle("Homepage");
-        $this->setView('default');
-    }
-
-    /**
-     * Sets default homepage
-     *
-     * @param string[] $parameters
-     * @param mixed[]|null $query
-     *
-     * @return void
-     */
-    public function process(array $parameters, array $query = null): void
+    public function getContentDefault(): void
     {
         $this->head->addMeta("description", "Homepage of website");
         $this->head->addMeta("keywords", "homepage,home");

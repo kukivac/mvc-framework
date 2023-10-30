@@ -17,8 +17,6 @@ class RoutesConfig
     /** @var mixed[] */
     protected array $routes;
 
-    /** @var string[] */
-    private array $result;
 
     /**
      * @param string[] $parameters
@@ -50,7 +48,8 @@ class RoutesConfig
     }
 
     /**
-     * Does not work now, @param mixed[]|null $routes
+     * Does not work now,
+     * @param mixed[]|null $routes
      * @return void
      * @throws RoutesException
      * @todo later

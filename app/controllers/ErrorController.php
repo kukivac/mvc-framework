@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use system\core\controllers\ViewController;
-use system\core\exceptions\ControllerException;
 
 /**
  * Controller ErrorController

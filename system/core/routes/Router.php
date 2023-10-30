@@ -55,8 +55,14 @@ final class Router
         $this->controller->setControllerName(str_replace("Controller", "", array_reverse(explode("\\", $controllerName))[0]));
         $request = ["jhaha" => "jfšf"];
         if ($this->controller->isActive()) {
-            call_user_func([$controllerClass, $route->getControllerMethod()], $request);
-            $this->controller->build();
+            $callback = [$controllerClass, $route->getControllerMethod()];
+            if (is_callable($callback)) {
+                call_user_func($callback, $request);
+                $this->controller->build();
+            } else {
+                $this->process("error/500");
+                exit();
+            }
         } else {
             $this->process("/");
             exit();
@@ -95,16 +101,6 @@ final class Router
             parse_str($urlComponents["query"], $query);
         }
         $this->setQuery($query);
-    }
-
-    /**
-     * @param string $text
-     *
-     * @return string
-     */
-    private function dashToCamel(string $text): string
-    {
-        return str_replace(' ', '', ucwords(str_replace('-', ' ', $text)));
     }
 
     /**

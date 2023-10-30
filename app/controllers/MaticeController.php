@@ -16,7 +16,7 @@ class MaticeController extends ViewController
         parent::__construct();
     }
 
-    public function getContentDefault()
+    public function getContentDefault(): void
     {
         $numbers = range(0, 1000);
         shuffle($numbers);
