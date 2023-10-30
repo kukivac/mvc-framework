@@ -19,15 +19,15 @@ class ErrorController extends ViewController
     /**
      * Sets view by error code
      *
-     * @param string[] $params
+     * @param string[] $parameters
      * @param mixed[]|null $query
      *
      * @return void
      */
-    public function process(array $params, array $query = null): void
+    public function process(array $parameters, array $query = null): void
     {
-        if (isset($params[0])) {
-            $errorCode = $params[0];
+        if (isset($parameters[0])) {
+            $errorCode = $parameters[0];
             $file = "../app/views/Error/" . $errorCode . ".latte";
             $errorCode = is_file($file) ? $errorCode : "400";
             call_user_func(["app\\Controllers\\ErrorController", "error" . $errorCode]);

@@ -14,7 +14,7 @@ class Database
     private PDO $pdo;
 
     /** @var mixed[] */
-    private array $params;
+    private array $parameters;
 
     /** @var string */
     private string $query;
@@ -36,7 +36,7 @@ class Database
         $database_credentials = Credentials::returnConfig();
         $dsn = "mysql:host=" . $database_credentials["host"] . ";dbname=" . $database_credentials["database"];
         $this->pdo = new PDO($dsn, $database_credentials["username"], $database_credentials["password"], $database_credentials["options"]);
-        $this->params = [];
+        $this->parameters = [];
         $this->transactionBegan = false;
         $this->executed = false;
     }
@@ -71,22 +71,22 @@ class Database
         if (!$this->executable()) {
             throw new DatabaseException("Execute cannot be called before statement is prepared");
         }
-        $executed = $this->statement->execute($this->params);
+        $executed = $this->statement->execute($this->parameters);
         $this->setExecuted();
 
         return $executed;
     }
 
     /**
-     * @param mixed ...$params
+     * @param mixed ...$parameters
      *
      * @return mixed
      * @throws DatabaseException
      */
-    public function fetchRow(...$params): mixed
+    public function fetchRow(...$parameters): mixed
     {
-        if (!empty($params)) {
-            $this->setParameters($params);
+        if (!empty($parameters)) {
+            $this->setParameters($parameters);
         }
         if ($this->statementExecuted()) {
             $this->execute();
@@ -96,15 +96,15 @@ class Database
     }
 
     /**
-     * @param mixed ...$params
+     * @param mixed ...$parameters
      *
      * @return mixed[]
      * @throws DatabaseException
      */
-    public function fetchRows(...$params): array
+    public function fetchRows(...$parameters): array
     {
-        if (!empty($params)) {
-            $this->setParameters($params);
+        if (!empty($parameters)) {
+            $this->setParameters($parameters);
         }
         if ($this->statementExecuted()) {
             $this->execute();
@@ -114,16 +114,16 @@ class Database
     }
 
     /**
-     * @param mixed ...$params
+     * @param mixed ...$parameters
      *
      * @return mixed
      * @throws DatabaseException
      */
-    public function fetchCell(...$params): mixed
+    public function fetchCell(...$parameters): mixed
     {
         $this->setFetchMode(PDO::FETCH_NUM);
 
-        return ($this->fetchRow(...$params)[0]);
+        return ($this->fetchRow(...$parameters)[0]);
     }
 
     /**
@@ -137,28 +137,28 @@ class Database
     }
 
     /**
-     * @param mixed[] $params
+     * @param mixed[] $parameters
      *
      * @return void
      */
-    private function setParameters(array $params): void
+    private function setParameters(array $parameters): void
     {
-        $this->params = $params;
+        $this->parameters = $parameters;
     }
 
     /**
      * @param int $fetchMode
-     * @param mixed ...$params
+     * @param mixed ...$parameters
      *
      * @return void
      * @throws DatabaseException
      */
-    public function setFetchMode(int $fetchMode, ...$params): void
+    public function setFetchMode(int $fetchMode, ...$parameters): void
     {
         if (!$this->statementPrepared()) {
             throw new DatabaseException("Cannot set fetch mode before statement is prepared");
         }
-        $this->statement->setFetchMode($fetchMode, ...$params);
+        $this->statement->setFetchMode($fetchMode, ...$parameters);
     }
 
     /**
