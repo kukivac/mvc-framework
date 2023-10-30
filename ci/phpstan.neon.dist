@@ -1,5 +1,5 @@
 parameters:
-    level: 8
+    level: 9
     parallel:
         processTimeout: -1.0
     paths:
@@ -16,5 +16,25 @@ parameters:
 
         -
             message: "#^Call to an undefined method Nette\\\\Utils\\\\Html\\:\\:addClass\\(\\)\\.$#"
+            count: 1
+            path: ../system/core/FormFactory.php
+
+        -
+            message: "#^Cannot call method getControlPrototype\\(\\) on mixed\\.$#"
+            count: 4
+            path: ../system/core/FormFactory.php
+
+        -
+            message: "#^Cannot call method getItemLabelPrototype\\(\\) on mixed\\.$#"
+            count: 1
+            path: ../system/core/FormFactory.php
+
+        -
+            message: "#^Cannot call method getOption\\(\\) on mixed\\.$#"
+            count: 1
+            path: ../system/core/FormFactory.php
+
+        -
+            message: "#^Cannot call method getSeparatorPrototype\\(\\) on mixed\\.$#"
             count: 1
             path: ../system/core/FormFactory.php
