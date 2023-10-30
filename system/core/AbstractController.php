@@ -29,23 +29,9 @@ abstract class AbstractController
     }
 
     /**
-     * Definition of process function for inheritance
-     *
-     * @param string[] $parameters
-     * Main url parameters
-     * @param mixed[]|null $query
-     * Get parameters from url
-     */
-    abstract function process(array $parameters, array $query = null): void;
-
-    /**
-     * Definition of process function for inheritance
-     *
-     * @param string[] $parameters
-     * @param mixed[]|null $query
      * @throws ControllerException
      */
-    abstract function build(array $parameters, array $query = null): void;
+    abstract function build(): void;
 
     /**
      * @return void

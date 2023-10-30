@@ -18,4 +18,17 @@ class Format
 
         return count($array) === count(array_filter($array, 'is_string'));
     }
+
+    /**
+     * @param mixed $array
+     * @return bool
+     */
+    public static function isArrayOfArrays(mixed $array): bool
+    {
+        if (!is_array($array)) {
+            return false;
+        }
+
+        return count($array) === count(array_filter($array, 'is_array'));
+    }
 }
