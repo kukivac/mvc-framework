@@ -12,9 +12,19 @@ abstract class DataController extends AbstractController
         parent::__construct($active);
     }
 
-    abstract function process(array $params, array $query = null);
+    /**
+     * @param string[] $params
+     * @param mixed[]|null $query
+     * @return void
+     */
+    abstract function process(array $params, array $query = null): void;
 
-    public function build(array $parameters, array $query = null)
+    /**
+     * @param mixed[] $parameters
+     * @param mixed[]|null $query
+     * @return void
+     */
+    public function build(array $parameters, array $query = null): void
     {
         $this->process($parameters, $query);
     }

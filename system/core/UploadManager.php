@@ -8,11 +8,11 @@ use RuntimeException;
 class UploadManager
 {
     /**
-     * @param $values
+     * @param FileUpload[] $values
      *
-     * @return bool|array
+     * @return bool|string[][]
      */
-    public static function UploadMultipleImages($values): array|bool
+    public static function UploadMultipleImages(array $values): array|bool
     {
         $filenames = [];
         $sanitizedFileNames = [];
@@ -59,11 +59,11 @@ class UploadManager
     }
 
     /**
-     * @param $file
+     * @param FileUpload $file
      *
-     * @return bool|array
+     * @return bool|string[]
      */
-    public static function UploadSingleImage($file): bool|array
+    public static function UploadSingleImage(FileUpload $file): bool|array
     {
         $filename = "";
         try {

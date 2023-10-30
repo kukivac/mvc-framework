@@ -2,6 +2,7 @@
 
 namespace app\config;
 
+use app\controllers\DefaultController;
 use system\core\Routes\RoutesConfig;
 
 class Routes extends RoutesConfig
@@ -14,8 +15,9 @@ class Routes extends RoutesConfig
     /**
      *  Cesty musí být definované ve formátu.
      * "nazev-cety" => ["cílový-controller","cílová-cesta-controlleru"]
+     * @var string[][]
      */
     protected array $routes = [
-
+        "karel" => ["Default", "process"],
     ];
 }

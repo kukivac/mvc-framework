@@ -31,21 +31,21 @@ abstract class AbstractController
     /**
      * Definition of process function for inheritance
      *
-     * @param array $params
+     * @param string[] $params
      * Main url parameters
-     * @param array|null $query
+     * @param mixed[]|null $query
      * Get parameters from url
      */
-    abstract function process(array $params, array $query = null);
+    abstract function process(array $params, array $query = null): void;
 
     /**
      * Definition of process function for inheritance
      *
-     * @param array $parameters
-     * @param array|null $query
+     * @param string[] $parameters
+     * @param mixed[]|null $query
      * @throws ControllerException
      */
-    abstract function build(array $parameters, array $query = null);
+    abstract function build(array $parameters, array $query = null): void;
 
     /**
      * @return void

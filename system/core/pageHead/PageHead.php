@@ -4,18 +4,23 @@ namespace system\core\pageHead;
 
 class PageHead
 {
+    /** @var MetaTag[] */
     private array $metas;
 
+    /** @var IconTag[] */
     private array $icons;
 
+    /** @var ScriptTag[] */
     private array $scripts;
 
     private TitleTag $title;
 
     private NoscriptTag $noscript;
 
+    /** @var StyleTag[] */
     private array $styles;
 
+    /** @var string */
     public string $resultHead;
 
     public function __construct()

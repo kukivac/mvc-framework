@@ -1,26 +1,25 @@
 <?php
 
-namespace System\Core\Routes;
+namespace system\core\Routes;
 
 use Exception;
-use System\Core\Exceptions\RoutesException;
+use system\core\exceptions\RoutesException;
 
 class Routes
 {
     /**
-     * @param mixed $parameter
+     * @param string $parameter
      *
-     * @return array|bool
+     * @return string[]|false
      * @throws RoutesException
      */
-    public static function tryRoute(mixed $parameter): bool|array
+    public static function tryRoute(string $parameter): false|array
     {
         try {
-            $routes = new \App\Config\Routes();
-        } catch (Exception) {
+            $routes = new \app\config\Routes();
+        } catch (Exception $exception) {
             return false;
         }
-
         return $routes->getRoutes($parameter);
     }
 }

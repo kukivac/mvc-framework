@@ -19,8 +19,8 @@ class ErrorController extends ViewController
     /**
      * Sets view by error code
      *
-     * @param array $params
-     * @param array|null $query
+     * @param string[] $params
+     * @param mixed[]|null $query
      *
      * @return void
      */

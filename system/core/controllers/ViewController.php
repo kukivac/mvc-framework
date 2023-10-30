@@ -10,7 +10,7 @@ use system\core\pageHead\PageHead;
 abstract class ViewController extends AbstractController
 {
     /**
-     * @var array $data
+     * @var mixed[] $data
      */
     protected array $data = [];
 
@@ -37,7 +37,12 @@ abstract class ViewController extends AbstractController
         $this->head = new PageHead();
     }
 
-    abstract function process(array $params, array $query = null);
+    /**
+     * @param string[] $params
+     * @param mixed[]|null $query
+     * @return void
+     */
+    abstract function process(array $params, array $query = null): void;
 
     /**
      * Renders selected view
@@ -78,9 +83,12 @@ abstract class ViewController extends AbstractController
     }
 
     /**
+     * @param string[] $parameters
+     * @param mixed[]|null $query
+     * @return void
      * @throws ControllerException
      */
-    public function build(array $parameters, array $query = null)
+    public function build(array $parameters, array $query = null): void
     {
         $this->process($parameters, $query);
         $this->writeView();
