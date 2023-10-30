@@ -246,7 +246,10 @@ class Database
         return !$this->executed;
     }
 
-    public function lastInsertId(): string
+    /**
+     * @return string|false
+     */
+    public function lastInsertId(): string|false
     {
         return $this->pdo->lastInsertId();
     }

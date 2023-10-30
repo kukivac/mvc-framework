@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use system\core\controllers\ViewController;
+use system\core\exceptions\ControllerException;
 
 /**
  * Controller ErrorController
@@ -23,6 +24,7 @@ class ErrorController extends ViewController
      * @param mixed[]|null $query
      *
      * @return void
+     * @throws ControllerException
      */
     public function process(array $parameters, array $query = null): void
     {
@@ -30,7 +32,15 @@ class ErrorController extends ViewController
             $errorCode = $parameters[0];
             $file = "../app/views/Error/" . $errorCode . ".latte";
             $errorCode = is_file($file) ? $errorCode : "400";
-            call_user_func(["app\\Controllers\\ErrorController", "error" . $errorCode]);
+
+            $methodName = "error" . $errorCode;
+            $callable = ["app\\Controllers\\ErrorController", $methodName];
+
+            if (is_callable($callable)) {
+                call_user_func($callable);
+            } else {
+                throw new ControllerException("Method " . $methodName . " of class app\\Controllers\\ErrorController is not callable");
+            }
         } else {
             $errorCode = "404";
         }

@@ -77,11 +77,22 @@ abstract class AbstractController
      * @param string $argument
      *
      * @return string
+     * @throws ControllerException
      */
     public function basicToDash(string $argument): string
     {
         $transliterator = Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: Lower(); :: NFC;', Transliterator::FORWARD);
+        if ($transliterator === null) {
+            throw new ControllerException('Could not create instance of $transliterator');
+        }
+        if (!($transliteratedResult = $transliterator->transliterate($argument))) {
+            throw new ControllerException("Could not transliterate argument: " . $argument);
+        }
+        $replaced_result = preg_replace("[\W+]", "-", $transliteratedResult);
+        if (!is_string($replaced_result)) {
+            throw new ControllerException("Result of preg_replace is not string");
+        }
 
-        return preg_replace("[\W+]", "-", $transliterator->transliterate($argument));
+        return $replaced_result;
     }
 }

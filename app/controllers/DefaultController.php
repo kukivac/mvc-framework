@@ -24,7 +24,7 @@ class DefaultController extends ViewController
      *
      * @return void
      */
-    public function process(array $parameters, array $query = null):void
+    public function process(array $parameters, array $query = null): void
     {
         $this->head->addMeta("description", "Homepage of website");
         $this->head->addMeta("keywords", "homepage,home");

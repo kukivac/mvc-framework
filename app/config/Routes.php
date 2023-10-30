@@ -2,7 +2,6 @@
 
 namespace app\config;
 
-use app\controllers\DefaultController;
 use system\core\Routes\RoutesConfig;
 
 class Routes extends RoutesConfig

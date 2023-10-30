@@ -46,15 +46,22 @@ final class Router
         /** Try custom routes */
         $routesResult = Routes::tryRoute($this->parameters[0]);
         if (Format::isArrayOfStrings($routesResult)) {
+            /** @var string[] $routesResult */
             $this->insertNewRoute($routesResult);
         }
 
+        $dashControllerName = array_shift($this->parameters);
+        if ($dashControllerName === null) {
+            throw new ControllerException("There isnt any parameter in parameters array");
+        }
         /* Controller name init */
-        $controllerName = $this->dashToCamel(array_shift($this->parameters));
+        $controllerName = $this->dashToCamel($dashControllerName);
         /* Controller class init */
         if (file_exists('../app/controllers/' . $controllerName . 'Controller.php')) {
-            $controllerClass = "\app\controllers\\" . $controllerName . 'Controller';
-            $this->controller = new $controllerClass;
+            $controllerClassName = "\app\controllers\\" . $controllerName . 'Controller';
+            /** @var AbstractController $controllerClass */
+            $controllerClass = new $controllerClassName;
+            $this->controller = $controllerClass;
         } else {
             $this->reroute('error/404');
         }
@@ -71,11 +78,15 @@ final class Router
      * @param string $url
      *
      * @return void
+     * @throws ControllerException
      */
     private function parseURL(string $url): void
     {
-        $url = parse_url($url);
-        $parsedURL = ltrim($url["path"], "/");
+        $urlComponents = parse_url($url);
+        if (!is_array($urlComponents) || !isset($urlComponents['path'])) {
+            throw new ControllerException("Url parameter path is not present.");
+        }
+        $parsedURL = ltrim($urlComponents["path"], "/");
         $parsedURL = trim($parsedURL);
         $parsedURL = explode("/", $parsedURL);
         $parameters = [];
@@ -91,8 +102,8 @@ final class Router
         }
         $this->setParameters($parameters);
         $query = [];
-        if (isset($url["query"])) {
-            parse_str($url["query"], $query);
+        if (isset($urlComponents["query"])) {
+            parse_str($urlComponents["query"], $query);
         }
         $this->setQuery($query);
     }
