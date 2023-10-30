@@ -22,12 +22,12 @@ class Route
         $this->authorization = $authorization;
     }
 
-    public function getControllerName()
+    public function getControllerName():string
     {
         return $this->controller[0];
     }
 
-    public function getControllerMethod()
+    public function getControllerMethod():string
     {
         return $this->controller[1];
     }
