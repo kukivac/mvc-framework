@@ -16,7 +16,11 @@ class DefaultController extends ViewController
         parent::__construct();
     }
 
-    public function getContentDefault(): void
+    /**
+     * @param mixed[] $query
+     * @return void
+     */
+    public function getContentDefault(array $query): void
     {
         $this->head->addMeta("description", "Homepage of website");
         $this->head->addMeta("keywords", "homepage,home");
