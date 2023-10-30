@@ -6,6 +6,10 @@ namespace system\core\Routes;
 
 class Route
 {
+
+    const CONTROLLER = "controller";
+    const AUTHORIZATION = "authorization";
+
     /** @var string[] */
     private array $controller;
 
