@@ -24,13 +24,13 @@ class ErrorController extends ViewController
      *
      * @return void
      */
-    public function process(array $params, array $query = null)
+    public function process(array $params, array $query = null): void
     {
         if (isset($params[0])) {
             $errorCode = $params[0];
             $file = "../app/views/Error/" . $errorCode . ".latte";
             $errorCode = is_file($file) ? $errorCode : "400";
-            call_user_func("error" . $errorCode);
+            call_user_func(["App\\Controllers\\ErrorController", "error" . $errorCode]);
         } else {
             $errorCode = "404";
         }
@@ -40,7 +40,7 @@ class ErrorController extends ViewController
         $this->setView($errorCode);
     }
 
-    public function error400()
+    public function error400(): void
     {
         $this->head->addMeta("description", "Bad request");
         $this->head->addMeta("keywords", "error,bad,request,400");
@@ -48,7 +48,7 @@ class ErrorController extends ViewController
         $this->setView("400");
     }
 
-    public function error401()
+    public function error401(): void
     {
         $this->head->addMeta("description", "Unauthorized");
         $this->head->addMeta("keywords", "error,unauthorized,401");
@@ -56,7 +56,7 @@ class ErrorController extends ViewController
         $this->setView("401");
     }
 
-    public function error404()
+    public function error404(): void
     {
         $this->head->addMeta("description", "Page not found");
         $this->head->addMeta("keywords", "error,404");
@@ -64,7 +64,7 @@ class ErrorController extends ViewController
         $this->setView("404");
     }
 
-    public function error405()
+    public function error405(): void
     {
         $this->head->addMeta("description", "Error occured");
         $this->head->addMeta("keywords", "error");
@@ -72,7 +72,7 @@ class ErrorController extends ViewController
         $this->setView("405");
     }
 
-    public function error410()
+    public function error410(): void
     {
         $this->head->addMeta("description", "Error occured");
         $this->head->addMeta("keywords", "error");
@@ -80,7 +80,7 @@ class ErrorController extends ViewController
         $this->setView("410");
     }
 
-    public function error500()
+    public function error500(): void
     {
         $this->head->addMeta("description", "Error occured");
         $this->head->addMeta("keywords", "error");

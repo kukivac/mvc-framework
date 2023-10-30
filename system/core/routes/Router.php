@@ -7,6 +7,7 @@ require(__DIR__ . "/../../../vendor/autoload.php");
 use JetBrains\PhpStorm\NoReturn;
 use PDOException;
 use System\Core\AbstractController;
+use System\Core\Exceptions\ControllerException;
 use System\Core\Exceptions\RoutesException;
 use System\Database\Database;
 
@@ -30,6 +31,7 @@ final class Router
      * @param $params
      *
      * @throws RoutesException
+     * @throws ControllerException
      */
     public function process($params): void
     {
@@ -108,7 +110,6 @@ final class Router
      */
     #[NoReturn] static function reroute(string $url, array $parameters = []): void
     {
-        $url = "/" . $url;
         if (!empty($parameters)) {
             $url .= "?" . http_build_query($parameters);
         }
@@ -154,7 +155,7 @@ final class Router
             $_SESSION["database"] = time();
         } else {
             if ($this->parameters[0] != "error") {
-                $this->reroute("error/500");
+                $this->reroute("/error/500");
             }
         }
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace system\core\helpers;
 
 use JetBrains\PhpStorm\NoReturn;
+use Tracy\Debugger;
 
 class Debug
 {
@@ -14,9 +15,7 @@ class Debug
      */
     public static function dump(...$variables): void
     {
-        echo '<pre>';
-        var_dump(...$variables);
-        echo '</pre>';
+        Debugger::dump($variables);
     }
 
     /**
@@ -25,9 +24,7 @@ class Debug
      */
     #[NoReturn] public static function dumpAndExit(...$variables): void
     {
-        echo '<pre>';
-        var_dump(...$variables);
-        echo '</pre>';
+        Debugger::dump($variables);
         die();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace System\Core;
 
+use System\Core\Exceptions\ControllerException;
 use Transliterator;
 
 /**
@@ -42,6 +43,7 @@ abstract class AbstractController
      *
      * @param array $parameters
      * @param array|null $query
+     * @throws ControllerException
      */
     abstract function build(array $parameters, array $query = null);
 
