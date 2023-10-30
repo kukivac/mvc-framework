@@ -1,12 +1,12 @@
 <?php
 
-namespace System\Database;
+namespace system\database;
 
-use App\Config\DbConfig as Credentials;
+use app\config\DbConfig as Credentials;
 use JetBrains\PhpStorm\Pure;
 use PDO;
 use PDOStatement;
-use System\Core\Exceptions\DatabaseException;
+use system\core\exceptions\DatabaseException;
 
 class Database
 {

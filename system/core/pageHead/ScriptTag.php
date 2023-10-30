@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Core\PageHead;
+namespace system\core\pageHead;
 
 class ScriptTag
 {

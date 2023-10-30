@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controllers;
+namespace app\controllers;
 
-use System\Core\Controllers\ViewController;
+use system\core\controllers\ViewController;
 
 /**
  * Controller DefaultController
  *
- * @package App\Controllers
+ * @package app\controllers
  */
 class MaticeController extends ViewController
 {

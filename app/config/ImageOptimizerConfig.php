@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Config;
+namespace app\config;
 
 /**
  * Config ImageOptimizerConfig
  *
- * @package App\Config
+ * @package app\config
  */
 class ImageOptimizerConfig
 {

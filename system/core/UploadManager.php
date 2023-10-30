@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Core;
+namespace system\core;
 
 use Nette\Http\FileUpload as FileUpload;
 use RuntimeException;

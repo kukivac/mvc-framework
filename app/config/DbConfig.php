@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Config;
+namespace app\config;
 
 use JetBrains\PhpStorm\ArrayShape;
 use PDO;
@@ -8,7 +8,7 @@ use PDO;
 /**
  * Config DbConfig
  *
- * @package App\Config
+ * @package app\config
  */
 class DbConfig
 {
