@@ -1,0 +1,26 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot call method getControlPrototype\\(\\) on mixed\\.$#"
+			count: 4
+			path: system/core/FormFactory.php
+
+		-
+			message: "#^Cannot call method getItemLabelPrototype\\(\\) on mixed\\.$#"
+			count: 1
+			path: system/core/FormFactory.php
+
+		-
+			message: "#^Cannot call method getOption\\(\\) on mixed\\.$#"
+			count: 1
+			path: system/core/FormFactory.php
+
+		-
+			message: "#^Cannot call method getSeparatorPrototype\\(\\) on mixed\\.$#"
+			count: 1
+			path: system/core/FormFactory.php
+
+		-
+			message: "#^Property system\\\\core\\\\Routes\\\\Router\\:\\:\\$query is never read, only written\\.$#"
+			count: 1
+			path: system/core/Routes/Router.php

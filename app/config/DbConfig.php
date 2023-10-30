@@ -29,17 +29,31 @@ class DbConfig
         PDO::ATTR_EMULATE_PREPARES => false,
     ];
 
+    public static function getHost(): string
+    {
+        return self::$host;
+    }
+
+    public static function getUsername(): string
+    {
+        return self::$username;
+    }
+
+    public static function getPass(): string
+    {
+        return self::$pass;
+    }
+
+    public static function getDatabase(): string
+    {
+        return self::$database;
+    }
+
     /**
      * @return mixed[]
      */
-    #[ArrayShape(["host" => "string", "username" => "string", "password" => "string", "database" => "string", "options" => "array"])] public static function returnConfig(): array
+    public static function getSettings(): array
     {
-        return [
-            "host" => DbConfig::$host,
-            "username" => DbConfig::$username,
-            "password" => DbConfig::$pass,
-            "database" => DbConfig::$database,
-            "options" => DbConfig::$settings,
-        ];
+        return self::$settings;
     }
 }

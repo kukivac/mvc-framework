@@ -33,9 +33,8 @@ class Database
      */
     public function __construct()
     {
-        $database_credentials = Credentials::returnConfig();
-        $dsn = "mysql:host=" . $database_credentials["host"] . ";dbname=" . $database_credentials["database"];
-        $this->pdo = new PDO($dsn, $database_credentials["username"], $database_credentials["password"], $database_credentials["options"]);
+        $dsn = "mysql:host=" . Credentials::getHost() . ";dbname=" . Credentials::getDatabase();
+        $this->pdo = new PDO($dsn, Credentials::getUsername(), Credentials::getPass(), Credentials::getSettings());
         $this->parameters = [];
         $this->transactionBegan = false;
         $this->executed = false;
@@ -123,7 +122,12 @@ class Database
     {
         $this->setFetchMode(PDO::FETCH_NUM);
 
-        return ($this->fetchRow(...$parameters)[0]);
+        $row = $this->fetchRow(...$parameters);
+        if (is_array($row)) {
+            return $row[0];
+        } else {
+            return $row;
+        }
     }
 
     /**
@@ -170,12 +174,12 @@ class Database
     }
 
     /**
-     * @param mixed $statement
+     * @param object $statement
      *
      * @return void
      * @throws DatabaseException
      */
-    private function prepareStatement(mixed $statement): void
+    private function prepareStatement(object $statement): void
     {
         if (!is_a($statement, "PDOStatement")) {
             throw new DatabaseException("Unable to prepare statement");
