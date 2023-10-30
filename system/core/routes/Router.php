@@ -1,20 +1,22 @@
 <?php
 
-namespace System\Core\Routes;
+namespace system\core\Routes;
 
 require(__DIR__ . "/../../../vendor/autoload.php");
 
 use JetBrains\PhpStorm\NoReturn;
 use PDOException;
-use System\Core\AbstractController;
-use System\Core\Exceptions\ControllerException;
-use System\Core\Exceptions\RoutesException;
-use System\Database\Database;
+use system\core\AbstractController;
+use system\core\exceptions\ControllerException;
+use system\core\exceptions\RoutesException;
+use system\core\helpers\Format;
+use system\database\Database;
+use Tracy\Debugger;
 
 /**
  * Router
  *
- * @package App\router
+ * @package app\router
  */
 final class Router
 {
@@ -23,24 +25,27 @@ final class Router
      */
     private AbstractController $controller;
 
+    /** @var string[] */
     private array $parameters;
 
+    /** @var mixed[] */
     private array $query;
 
     /**
-     * @param $params
+     * @param string $request_uri
      *
      * @throws RoutesException
      * @throws ControllerException
      */
-    public function process($params): void
+    public function process(string $request_uri): void
     {
-        /* URL Parsing */
-        $this->parseURL($params[0]);
         /* Database connection tryout */
         $this->testDatabaseConnection();
-
-        if ($routesResult = Routes::tryRoute($this->parameters[0])) {
+        /* URL Parsing */
+        $this->parseURL($request_uri);
+        /** Try custom routes */
+        $routesResult = Routes::tryRoute($this->parameters[0]);
+        if (Format::isArrayOfStrings($routesResult)) {
             $this->insertNewRoute($routesResult);
         }
 
@@ -48,7 +53,7 @@ final class Router
         $controllerName = $this->dashToCamel(array_shift($this->parameters));
         /* Controller class init */
         if (file_exists('../app/controllers/' . $controllerName . 'Controller.php')) {
-            $controllerClass = "\app\Controllers\\" . $controllerName . 'Controller';
+            $controllerClass = "\app\controllers\\" . $controllerName . 'Controller';
             $this->controller = new $controllerClass;
         } else {
             $this->reroute('error/404');
@@ -97,21 +102,21 @@ final class Router
      *
      * @return string
      */
-    private function dashToCamel(string $text)
+    private function dashToCamel(string $text): string
     {
         return str_replace(' ', '', ucwords(str_replace('-', ' ', $text)));
     }
 
     /**
      * @param string $url
-     * @param array $parameters
+     * @param mixed[] $queryParameters
      *
      * @return void
      */
-    #[NoReturn] static function reroute(string $url, array $parameters = []): void
+    #[NoReturn] static function reroute(string $url, array $queryParameters = []): void
     {
-        if (!empty($parameters)) {
-            $url .= "?" . http_build_query($parameters);
+        if (!empty($queryParameters)) {
+            $url .= "?" . http_build_query($queryParameters);
         }
         header("Location: /$url");
         header("Connection: close");
@@ -119,7 +124,7 @@ final class Router
     }
 
     /**
-     * @param array $parameters
+     * @param string[] $parameters
      */
     private function setParameters(array $parameters): void
     {
@@ -127,7 +132,7 @@ final class Router
     }
 
     /**
-     * @param array $query
+     * @param mixed[] $query
      */
     private function setQuery(array $query): void
     {
@@ -154,6 +159,7 @@ final class Router
         if ($this->testDatabaseObject()) {
             $_SESSION["database"] = time();
         } else {
+            Debugger::log("Error with Database test");
             if ($this->parameters[0] != "error") {
                 $this->reroute("/error/500");
             }
@@ -175,7 +181,11 @@ final class Router
         }
     }
 
-    private function insertNewRoute(array|bool $routesResult)
+    /**
+     * @param string[] $routesResult
+     * @return void
+     */
+    private function insertNewRoute(array $routesResult)
     {
         $this->setParameters($routesResult);
     }

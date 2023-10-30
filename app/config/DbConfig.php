@@ -20,6 +20,9 @@ class DbConfig
 
     private static string $database = 'mydb';
 
+    /**
+     * @var mixed[]
+     */
     private static array $settings = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
@@ -27,7 +30,7 @@ class DbConfig
     ];
 
     /**
-     * @return array
+     * @return mixed[]
      */
     #[ArrayShape(["host" => "string", "username" => "string", "password" => "string", "database" => "string", "options" => "array"])] public static function returnConfig(): array
     {

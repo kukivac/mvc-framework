@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Core\Routes;
+namespace system\core\Routes;
 
-use System\Core\Exceptions\RoutesException;
+use system\core\exceptions\RoutesException;
 
 class RoutesConfig
 {
@@ -10,17 +10,20 @@ class RoutesConfig
     {
     }
 
+    /**
+     * @var mixed[]
+     */
     protected array $routes;
 
     private mixed $result;
 
     /**
-     * @param $needle
+     * @param mixed $needle
      *
-     * @return bool|array
+     * @return mixed
      * @throws RoutesException
      */
-    public function getRoutes($needle): bool|array
+    public function getRoutes(mixed $needle): mixed
     {
         $this->sanitizeConfig();
         if (isset($this->routes[$needle])) {

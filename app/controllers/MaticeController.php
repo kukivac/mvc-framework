@@ -19,12 +19,12 @@ class MaticeController extends ViewController
     /**
      * Sets default homepage
      *
-     * @param array $params
-     * @param array|null $query
+     * @param string[] $params
+     * @param mixed[]|null $query
      *
      * @return void
      */
-    public function process(array $params, array $query = null)
+    public function process(array $params, array $query = null):void
     {
         $numbers = range(0, 1000);
         shuffle($numbers);

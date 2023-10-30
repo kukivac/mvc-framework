@@ -11,7 +11,7 @@ require("../vendor/autoload.php");
 
 Debugger::enable();
 Debugger::$logDirectory = __DIR__ . '\..\log';
-function autoloadFunction($class): void
+function autoloadFunction(string $class): void
 {
     $classname = "./../" . str_replace("\\", "/", $class) . ".php";
     if (is_readable($classname)) {
@@ -42,4 +42,4 @@ mb_internal_encoding("UTF-8");
 session_start();
 
 $router = new Router();
-$router->process([$_SERVER['REQUEST_URI']]);
+$router->process($_SERVER['REQUEST_URI']);

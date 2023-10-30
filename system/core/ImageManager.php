@@ -54,12 +54,12 @@ class ImageManager
     }
 
     /**
-     * @param $newURL
-     * @param $oldURL
-     * @param $targetWidth
-     * @param $targetHeight
+     * @param string $newURL
+     * @param string $oldURL
+     * @param int $targetWidth
+     * @param int $targetHeight
      */
-    static function editImage($newURL, $oldURL, $targetWidth, $targetHeight)
+    static function editImage(string $newURL, string $oldURL, int $targetWidth, int $targetHeight): void
     {
         $img = Image::make($oldURL);
 

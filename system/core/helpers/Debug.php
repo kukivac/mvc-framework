@@ -10,7 +10,7 @@ use Tracy\Debugger;
 class Debug
 {
     /**
-     * @param mixed $variables
+     * @param mixed ...$variables
      * @return void
      */
     public static function dump(...$variables): void

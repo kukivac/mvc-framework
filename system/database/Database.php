@@ -13,7 +13,7 @@ class Database
     /** @var PDO */
     private PDO $pdo;
 
-    /** @var array */
+    /** @var mixed[] */
     private array $params;
 
     /** @var string */
@@ -42,13 +42,13 @@ class Database
     }
 
     /**
-     * @param $sql
-     * @param ...$parameters
+     * @param string $sql
+     * @param mixed ...$parameters
      *
      * @return void
      * @throws DatabaseException
      */
-    public function prepare($sql, ...$parameters): void
+    public function prepare(string $sql, ...$parameters): void
     {
         if (!empty($parameters)) {
             $this->setParameters($parameters);
@@ -58,7 +58,7 @@ class Database
     }
 
     /**
-     * @param ...$parameters
+     * @param mixed ...$parameters
      *
      * @return bool
      * @throws DatabaseException
@@ -98,7 +98,7 @@ class Database
     /**
      * @param mixed ...$params
      *
-     * @return array
+     * @return mixed[]
      * @throws DatabaseException
      */
     public function fetchRows(...$params): array
@@ -137,7 +137,7 @@ class Database
     }
 
     /**
-     * @param array $params
+     * @param mixed[] $params
      *
      * @return void
      */
