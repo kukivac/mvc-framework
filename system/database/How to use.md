@@ -27,7 +27,7 @@ You can use transactions just like with PDO.
 $database = new Database;
 try{
     $database->beginTransaction();
-    $database->prepare($sql,$params);
+    $database->prepare($sql,$parameters);
     $database->execute();
     $database->commit();
 }catch(DatabaseException $exception){

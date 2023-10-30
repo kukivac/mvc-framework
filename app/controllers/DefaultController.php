@@ -19,12 +19,12 @@ class DefaultController extends ViewController
     /**
      * Sets default homepage
      *
-     * @param string[] $params
+     * @param string[] $parameters
      * @param mixed[]|null $query
      *
      * @return void
      */
-    public function process(array $params, array $query = null):void
+    public function process(array $parameters, array $query = null):void
     {
         $this->head->addMeta("description", "Homepage of website");
         $this->head->addMeta("keywords", "homepage,home");
