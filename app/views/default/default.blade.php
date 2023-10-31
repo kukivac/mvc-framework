@@ -1,3 +1,4 @@
+@extends('base')
 <header>
     <h1>MVC Framework by Jakub Kováč</h1>
 </header>

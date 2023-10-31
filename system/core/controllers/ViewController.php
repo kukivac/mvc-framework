@@ -50,9 +50,7 @@ abstract class ViewController extends AbstractController
     {
         if ($this->view) {
             $this->data["head"] = $this->head->render();
-            $this->view_engine->setView($this->view);
-            $template = $this->view_engine->loadTemplate('layout');
-            echo $template->render($this->data);
+            echo $this->view_engine->run($this->view,$this->data);
         } else {
             throw new ControllerException("View file not selected");
         }
