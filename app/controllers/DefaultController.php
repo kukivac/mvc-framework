@@ -25,6 +25,6 @@ class DefaultController extends ViewController
         $this->head->addMeta("description", "Homepage of website");
         $this->head->addMeta("keywords", "homepage,home");
         $this->head->addTitle("Homepage");
-        $this->setView('default/default');
+        $this->setView('default.default');
     }
 }
