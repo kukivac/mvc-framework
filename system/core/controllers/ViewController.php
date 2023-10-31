@@ -2,7 +2,10 @@
 
 namespace system\core\controllers;
 
-use Latte\Engine;
+use eftec\bladeone\BladeOne;
+use Mustache_Engine;
+use Mustache_Loader_FilesystemLoader;
+use Mustache_Logger_StreamLogger;
 use system\core\AbstractController;
 use system\core\exceptions\ControllerException;
 use system\core\pageHead\PageHead;
@@ -24,16 +27,16 @@ abstract class ViewController extends AbstractController
      */
     protected PageHead $head;
 
-    /**
-     * @var Engine $latte
-     * Variable for class Latte\Engine object
-     */
-    private Engine $latte;
+    /** @var BladeOne */
+    private BladeOne $view_engine;
 
     public function __construct(bool $active = true)
     {
         parent::__construct($active);
-        $this->latte = new Engine();
+        $this->view_engine = new BladeOne(
+            __DIR__ . "/../../../app/views",
+            __DIR__ . "/../../../tmp/cache/compiled_views"
+        );
         $this->head = new PageHead();
     }
 
@@ -46,9 +49,10 @@ abstract class ViewController extends AbstractController
     public function writeView(): void
     {
         if ($this->view) {
-            $this->view = __DIR__ . "/../../../app/views/" . $this->controllerName . "/" . $this->view . ".latte";
             $this->data["head"] = $this->head->render();
-            $this->latte->render($this->view, $this->data);
+            $this->view_engine->setView($this->view);
+            $template = $this->view_engine->loadTemplate('layout');
+            echo $template->render($this->data);
         } else {
             throw new ControllerException("View file not selected");
         }

@@ -12,7 +12,6 @@ use system\core\exceptions\ControllerException;
 use system\core\exceptions\RoutesException;
 use system\core\helpers\Format;
 use system\database\Database;
-use Tracy\Debugger;
 
 /**
  * Router
@@ -166,7 +165,6 @@ final class Router
         if ($this->testDatabaseObject()) {
             $_SESSION["database"] = time();
         } else {
-            Debugger::log("Error with Database test");
             if ($this->parameters[0] != "error") {
                 $this->reroute("/error/500");
             }
