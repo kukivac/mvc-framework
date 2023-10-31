@@ -7,15 +7,14 @@
   "require": {
     "php": "8.2.*",
     "intervention/image": "2.*",
-    "latte/latte": "v2.*",
-    "nette/forms": "v3.*",
     "ext-pdo": "*",
     "ext-fileinfo": "*",
     "ext-json": "*",
     "ext-intl": "*",
     "guzzlehttp/guzzle": "^7.0",
     "ext-mbstring": "*",
-    "tracy/tracy": "^2.10"
+    "tracy/tracy": "^2.10",
+    "eftec/bladeone": "^4.9"
   },
   "authors": [
     {
