@@ -6,13 +6,16 @@ namespace system\core\helpers;
 
 class Environment
 {
-    /** @var SystemEnvironments|null */
-    private static ?SystemEnvironments $system_environment = null;
+    public const DEVELOPMENT = "dev";
+    public const PRODUCTION = "prod";
+
+    /** @var string|null */
+    private static $system_environment = null;
 
     /**
-     * @return SystemEnvironments
+     * @return string
      */
-    public static function getSystemEnvironment(): SystemEnvironments
+    public static function getSystemEnvironment(): string
     {
         if (self::$system_environment === null) {
             throw new \RuntimeException("No environment is set!");
@@ -22,10 +25,10 @@ class Environment
     }
 
     /**
-     * @param SystemEnvironments $system_environment
+     * @param string $system_environment
      * @return void
      */
-    public static function setSystemEnvironment(SystemEnvironments $system_environment): void
+    public static function setSystemEnvironment(string $system_environment): void
     {
         if (self::$system_environment === null) {
             self::$system_environment = $system_environment;

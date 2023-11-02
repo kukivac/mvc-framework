@@ -12,7 +12,7 @@ class RoutesConfig
     /**
      * @var mixed[]
      */
-    protected array $routes = [
+    protected $routes = [
         "/" => [
             Route::CONTROLLER => [DefaultController::class, "getContentDefault"],
             Route::AUTHORIZATION => true,

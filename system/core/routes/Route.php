@@ -11,10 +11,10 @@ class Route
     const AUTHORIZATION = "authorization";
 
     /** @var string[] */
-    private array $controller;
+    private $controller;
 
     /** @var bool */
-    private bool $authorization;
+    private $authorization;
 
     /**
      * @param string[] $controller

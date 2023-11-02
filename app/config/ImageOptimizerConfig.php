@@ -9,11 +9,18 @@ namespace app\config;
  */
 class ImageOptimizerConfig
 {
-    public static int $defaultImageHeight = 1080;
+    /** @var int */
+    public static $defaultImageHeight = 1080;
 
-    public static int $defaultImageWidth = 1920;
+    /** @var int */
 
-    public static int $thumbnailHeight = 480;
+    public static $defaultImageWidth = 1920;
 
-    public static int $thumbnailWidth = 720;
+    /** @var int */
+
+    public static $thumbnailHeight = 480;
+
+    /** @var int */
+
+    public static $thumbnailWidth = 720;
 }

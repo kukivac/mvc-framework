@@ -3,7 +3,6 @@
 ini_set('memory_limit', '-1');
 
 use system\core\helpers\Environment;
-use system\core\helpers\SystemEnvironments;
 use system\core\Routes\Router;
 use Tracy\Debugger;
 
@@ -22,12 +21,12 @@ function autoloadFunction(string $class): void
 
 spl_autoload_register("autoloadFunction");
 
-Environment::setSystemEnvironment(SystemEnvironments::DEVELOPMENT);
+Environment::setSystemEnvironment(Environment::DEVELOPMENT);
 switch (Environment::getSystemEnvironment()) {
-    case SystemEnvironments::DEVELOPMENT:
+    case Environment::DEVELOPMENT:
         ini_set('error_reporting', E_ALL);
         break;
-    case SystemEnvironments::PRODUCTION:
+    case Environment::PRODUCTION:
         if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off") {
             $redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
             header('HTTP/1.1 301 Moved Permanently');
