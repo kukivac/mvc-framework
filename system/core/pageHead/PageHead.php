@@ -5,23 +5,25 @@ namespace system\core\pageHead;
 class PageHead
 {
     /** @var MetaTag[] */
-    private array $metas;
+    private $metas;
 
     /** @var IconTag[] */
-    private array $icons;
+    private $icons;
 
     /** @var ScriptTag[] */
-    private array $scripts;
+    private $scripts;
 
-    private TitleTag $title;
+    /** @var TitleTag */
+    private $title;
 
-    private NoscriptTag $noscript;
+    /** @var NoscriptTag */
+    private $noscript;
 
     /** @var StyleTag[] */
-    private array $styles;
+    private $styles;
 
     /** @var string */
-    public string $resultHead;
+    public $resultHead;
 
     public function __construct()
     {

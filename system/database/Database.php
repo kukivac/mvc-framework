@@ -3,7 +3,6 @@
 namespace system\database;
 
 use app\config\DbConfig as Credentials;
-use JetBrains\PhpStorm\Pure;
 use PDO;
 use PDOStatement;
 use system\core\exceptions\DatabaseException;
@@ -11,22 +10,22 @@ use system\core\exceptions\DatabaseException;
 class Database
 {
     /** @var PDO */
-    private PDO $pdo;
+    private  $pdo;
 
     /** @var mixed[] */
-    private array $parameters;
+    private  $parameters;
 
     /** @var string */
-    private string $query;
+    private  $query;
 
     /** @var PDOStatement */
-    public PDOStatement $statement;
+    public  $statement;
 
     /** @var bool */
-    private bool $transactionBegan;
+    private  $transactionBegan;
 
     /** @var bool */
-    private bool $executed;
+    private  $executed;
 
     /**
      * Database constructor.
@@ -179,7 +178,7 @@ class Database
      * @return void
      * @throws DatabaseException
      */
-    private function prepareStatement(object $statement): void
+    private function prepareStatement($statement): void
     {
         if (!is_a($statement, "PDOStatement")) {
             throw new DatabaseException("Unable to prepare statement");
@@ -229,7 +228,7 @@ class Database
     /**
      * @return bool
      */
-    #[Pure] private function executable(): bool
+    private function executable(): bool
     {
         return $this->statementPrepared();
     }
@@ -253,7 +252,7 @@ class Database
     /**
      * @return string|false
      */
-    public function lastInsertId(): string|false
+    public function lastInsertId()
     {
         return $this->pdo->lastInsertId();
     }

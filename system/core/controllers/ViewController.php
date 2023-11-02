@@ -15,20 +15,20 @@ abstract class ViewController extends AbstractController
     /**
      * @var mixed[] $data
      */
-    protected array $data = [];
+    protected  $data = [];
 
     /**
      * @var string $view
      */
-    protected string $view;
+    protected  $view;
 
     /**
      * @var PageHead $head
      */
-    protected PageHead $head;
+    protected  $head;
 
     /** @var BladeOne */
-    private BladeOne $view_engine;
+    private  $view_engine;
 
     public function __construct(bool $active = true)
     {

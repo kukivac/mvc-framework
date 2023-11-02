@@ -12,23 +12,26 @@ class UploadManager
      *
      * @return bool|string[][]
      */
-    public static function UploadMultipleImages(array $values): array|bool
+    public static function UploadMultipleImages(array $values)
     {
         $filenames = [];
         $sanitizedFileNames = [];
         try {
             foreach ($values as $file) {
-                /**
-                 * @var FileUpload $file
-                 */
-                $ext = match ($file->getImageFileExtension()) {
-                    "jpeg" => "jpg",
-                    default => $file->getImageFileExtension(),
-                };
+                $fileExtension = $file->getImageFileExtension();
+                switch ($fileExtension) {
+                    case "jpeg":
+                        $ext = "jpg";
+                        break;
+                    default:
+                        $ext = $fileExtension;
+                        break;
+                }
+
                 //Filename with extension
-                array_push($filenames, ($filename = hash("sha256", $file->getTemporaryFile()) . "." . $ext));
+                $filenames[] = ($filename = hash("sha256", $file->getTemporaryFile()) . "." . $ext);
                 //File name with sanitized name
-                array_push($sanitizedFileNames, $file->getSanitizedName());
+                $sanitizedFileNames[] = $file->getSanitizedName();
                 //Filename with target directory
                 $filenameWDir = sprintf(
                     'images/fullView/%s',
@@ -44,7 +47,7 @@ class UploadManager
                 ImageManager::defaultImage($filenameWDir);
                 ImageManager::makeThumbnail($filenameWDir);
             }
-        } catch (RuntimeException) {
+        } catch (RuntimeException $exception) {
             if (count($filenames) !== 0) {
                 foreach ($filenames as $filename) {
                     unlink("images/fullView/" . $filename);
@@ -63,17 +66,20 @@ class UploadManager
      *
      * @return bool|string[]
      */
-    public static function UploadSingleImage(FileUpload $file): bool|array
+    public static function UploadSingleImage(FileUpload $file)
     {
         $filename = "";
         try {
-            /**
-             * @var FileUpload $file
-             */
-            $ext = match ($file->getImageFileExtension()) {
-                "jpeg" => "jpg",
-                default => $file->getImageFileExtension(),
-            };
+            $fileExtension = $file->getImageFileExtension();
+            switch ($fileExtension) {
+                case "jpeg":
+                    $ext = "jpg";
+                    break;
+                default:
+                    $ext = $fileExtension;
+                    break;
+            }
+
             //Filename
             $filename = hash("sha256", $file->getTemporaryFile()) . "." . $ext;
             //File name with sanitized name
@@ -94,7 +100,7 @@ class UploadManager
             ImageManager::makeThumbnail($filenameWDir);
 
             return ["filename" => $filename, "sanitizedFileName" => $sanitizedFileName];
-        } catch (RuntimeException) {
+        } catch (RuntimeException $exception) {
             @unlink("images/fullView/" . $filename);
             @unlink("images/thumbnail/" . $filename);
 

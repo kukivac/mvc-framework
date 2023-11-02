@@ -4,13 +4,17 @@ namespace system\core\pageHead;
 
 class StyleTag
 {
+    /** @var string */
+    protected $style;
+
     /**
      * StyleTag constructor.
      *
      * @param string $style
      */
-    public function __construct(protected string $style)
+    public function __construct(string $style)
     {
+        $this->style = $style;
     }
 
     /**

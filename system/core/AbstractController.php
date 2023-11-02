@@ -13,10 +13,10 @@ use Transliterator;
 abstract class AbstractController
 {
     /** @var string */
-    protected string $controllerName;
+    protected $controllerName;
 
     /** @var bool */
-    protected bool $active;
+    protected $active;
 
     /**
      * Controller constructor.

@@ -12,18 +12,25 @@ use PDO;
  */
 class DbConfig
 {
-    private static string $host = '127.0.0.1';
+    /** @var string */
+    private static $host = '127.0.0.1';
 
-    private static string $username = 'root';
+    /** @var string */
 
-    private static string $pass = '';
+    private static $username = 'root';
 
-    private static string $database = 'mydb';
+    /** @var string */
+
+    private static $pass = '';
+
+    /** @var string */
+
+    private static $database = 'mydb';
 
     /**
      * @var mixed[]
      */
-    private static array $settings = [
+    private static $settings = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
         PDO::ATTR_EMULATE_PREPARES => false,

@@ -10,7 +10,7 @@ class Format
      * @param mixed $array
      * @return bool
      */
-    public static function isArrayOfStrings(mixed $array): bool
+    public static function isArrayOfStrings($array): bool
     {
         if (!is_array($array)) {
             return false;
@@ -23,7 +23,7 @@ class Format
      * @param mixed $array
      * @return bool
      */
-    public static function isArrayOfArrays(mixed $array): bool
+    public static function isArrayOfArrays( $array): bool
     {
         if (!is_array($array)) {
             return false;

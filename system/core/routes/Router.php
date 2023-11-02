@@ -5,7 +5,6 @@ namespace system\core\Routes;
 require(__DIR__ . "/../../../vendor/autoload.php");
 
 use app\config\RoutesConfig;
-use JetBrains\PhpStorm\NoReturn;
 use PDOException;
 use system\core\AbstractController;
 use system\core\exceptions\ControllerException;
@@ -21,18 +20,18 @@ use system\database\Database;
 final class Router
 {
     /** @var mixed[] */
-    protected array $routes;
+    protected $routes;
 
     /**
      * @var AbstractController $data
      */
-    private AbstractController $controller;
+    private $controller;
 
     /** @var string[] */
-    private array $parameters;
+    private $parameters;
 
     /** @var mixed[] */
-    private array $query;
+    private $query;
 
     public function __construct()
     {
@@ -55,7 +54,7 @@ final class Router
         try {
             $routes = new RoutesConfig();
             $route = $this->getRoute($this->parameters);
-        } catch (RoutesException) {
+        } catch (RoutesException $exception) {
             $this->process("error/404");
             exit();
         }
@@ -119,7 +118,7 @@ final class Router
      *
      * @return void
      */
-    #[NoReturn] static function reroute(string $url, array $queryParameters = []): void
+    static function reroute(string $url, array $queryParameters = []): void
     {
         if (!empty($queryParameters)) {
             $url .= "?" . http_build_query($queryParameters);
@@ -181,7 +180,7 @@ final class Router
 
             return true;
         } catch
-        (PDOException) {
+        (PDOException $exception) {
             return false;
         }
     }

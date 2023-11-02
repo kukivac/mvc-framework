@@ -4,6 +4,15 @@ namespace system\core\pageHead;
 
 class IconTag
 {
+    /** @var string */
+    protected $rel;
+
+    /** @var string|null */
+    protected $type;
+
+    /** @var string */
+    protected $href;
+
     /**
      * IconTag constructor.
      *
@@ -11,8 +20,11 @@ class IconTag
      * @param string|null $type
      * @param string $href
      */
-    public function __construct(protected string $rel, protected ?string $type, protected string $href)
+    public function __construct(string $rel, ?string $type, string $href)
     {
+        $this->href = $href;
+        $this->type = $type;
+        $this->rel = $rel;
     }
 
     /**

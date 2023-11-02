@@ -4,6 +4,15 @@ namespace system\core\pageHead;
 
 class MetaTag
 {
+    /** @var string */
+    protected $name;
+
+    /** @var string */
+    protected $nameProp;
+
+    /** @var string */
+    protected $content;
+
     /**
      * MetaTag constructor.
      *
@@ -11,8 +20,11 @@ class MetaTag
      * @param string $nameProp
      * @param string $content
      */
-    public function __construct(protected string $name, protected string $nameProp, protected string $content)
+    public function __construct(string $name, string $nameProp, string $content)
     {
+        $this->content = $content;
+        $this->nameProp = $nameProp;
+        $this->name = $name;
     }
 
     /**

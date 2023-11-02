@@ -4,8 +4,12 @@ namespace system\core\pageHead;
 
 class TitleTag
 {
-    public function __construct(protected string $title)
+    /** @var string */
+    protected $title;
+
+    public function __construct(string $title)
     {
+        $this->title = $title;
     }
 
     public function render(): string
