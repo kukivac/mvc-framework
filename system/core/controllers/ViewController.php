@@ -3,32 +3,23 @@
 namespace system\core\controllers;
 
 use eftec\bladeone\BladeOne;
-use Mustache_Engine;
-use Mustache_Loader_FilesystemLoader;
-use Mustache_Logger_StreamLogger;
 use system\core\AbstractController;
 use system\core\exceptions\ControllerException;
-use system\core\pageHead\PageHead;
 
 abstract class ViewController extends AbstractController
 {
     /**
      * @var mixed[] $data
      */
-    protected  $data = [];
+    protected $data = [];
 
     /**
      * @var string $view
      */
-    protected  $view;
-
-    /**
-     * @var PageHead $head
-     */
-    protected  $head;
+    protected $view;
 
     /** @var BladeOne */
-    private  $view_engine;
+    private $view_engine;
 
     public function __construct(bool $active = true)
     {
@@ -37,7 +28,6 @@ abstract class ViewController extends AbstractController
             __DIR__ . "/../../../app/views",
             __DIR__ . "/../../../tmp/cache/compiled_views"
         );
-        $this->head = new PageHead();
     }
 
     /**
@@ -49,8 +39,7 @@ abstract class ViewController extends AbstractController
     public function writeView(): void
     {
         if ($this->view) {
-            $this->data["head"] = $this->head->render();
-            echo $this->view_engine->run($this->view,$this->data);
+            echo $this->view_engine->run($this->view, $this->data);
         } else {
             throw new ControllerException("View file not selected");
         }

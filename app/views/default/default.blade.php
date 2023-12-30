@@ -1,5 +1,5 @@
 @extends('base')
-<header>
-    <h1>MVC Framework by Jakub Kováč</h1>
-</header>
-<a href="../matice">Matice</a>
+@section('title',$title)
+@section('content')
+    <a href="../matice">Matice</a>
+@endsection

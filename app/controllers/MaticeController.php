@@ -48,10 +48,7 @@ class MaticeController extends ViewController
         $tables["Neseřazená"] = $matice;
         $tables["Seřazená"] = $sortedArray;
 
-        $this->head->addMeta("description", "Homepage of website");
-        $this->head->addMeta("keywords", "homepage,home");
-        $this->head->addTitle("Homepage");
         $this->data["tables"] = $tables;
-        $this->setView('default');
+        $this->setView('matice.matice');
     }
 }

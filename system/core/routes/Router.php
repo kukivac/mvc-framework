@@ -9,6 +9,7 @@ use PDOException;
 use system\core\AbstractController;
 use system\core\exceptions\ControllerException;
 use system\core\exceptions\RoutesException;
+use system\core\helpers\Environment;
 use system\core\helpers\Format;
 use system\database\Database;
 
@@ -158,14 +159,17 @@ final class Router
 
     /**
      * @return void
+     * @throws ControllerException
      */
     private function writeDatabaseFlag(): void
     {
         if ($this->testDatabaseObject()) {
             $_SESSION["database"] = time();
         } else {
-            if ($this->parameters[0] != "error") {
-                $this->reroute("/error/500");
+            if (Environment::useDatabase()) {
+                if ($this->parameters[0] != "error") {
+                    $this->process("error/500");
+                }
             }
         }
     }

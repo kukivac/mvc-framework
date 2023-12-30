@@ -12,6 +12,9 @@ class Environment
     /** @var string|null */
     private static $system_environment = null;
 
+    /** @var bool */
+    private static $use_database = null;
+
     /**
      * @return string
      */
@@ -35,5 +38,23 @@ class Environment
         } else {
             throw new \RuntimeException("System environment already set!");
         }
+    }
+
+    /**
+     * @param bool $use_database
+     * @return void
+     */
+    public static function setUseDatabase(bool $use_database): void
+    {
+        if (self::$use_database === null) {
+            self::$use_database = $use_database;
+        } else {
+            throw new \RuntimeException("Database usage flag already set!");
+        }
+    }
+
+    public static function useDatabase()
+    {
+        return self::$use_database;
     }
 }
