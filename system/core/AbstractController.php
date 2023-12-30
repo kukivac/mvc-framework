@@ -3,6 +3,7 @@
 namespace system\core;
 
 use system\core\exceptions\ControllerException;
+use system\core\user\User;
 use Transliterator;
 
 /**
@@ -17,6 +18,9 @@ abstract class AbstractController
 
     /** @var bool */
     protected $active;
+
+    /** @var User|null */
+    protected $user = null;
 
     /**
      * Controller constructor.
@@ -55,6 +59,28 @@ abstract class AbstractController
     public final function setControllerName(string $controllerName): void
     {
         $this->controllerName = $controllerName;
+    }
+
+    /**
+     * @param User|null $user
+     * @param bool $set_to_session
+     * @return void
+     */
+    public final function setLoggedInUser(?User $user, bool $set_to_session = false)
+    {
+        $this->user = $user;
+
+        if ($set_to_session) {
+            $_SESSION["user"] = $user;
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public final function isLoggedInUser(): bool
+    {
+        return $this->user instanceof User;
     }
 
     /**

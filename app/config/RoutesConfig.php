@@ -5,7 +5,10 @@ namespace app\config;
 use app\controllers\DefaultController;
 use app\controllers\ErrorController;
 use app\controllers\MaticeController;
+use app\controllers\UserAjaxController;
+use app\controllers\UserController;
 use system\core\Routes\Route;
+use system\core\Routes\Router;
 
 class RoutesConfig
 {
@@ -21,12 +24,38 @@ class RoutesConfig
             Route::CONTROLLER => [MaticeController::class, "getContentDefault"],
             Route::AUTHORIZATION => false,
         ],
-        "karel" => [
-            "prca" => [
+        "user" => [
+            "/" => [
+                Route::CONTROLLER => [UserController::class, "getContentProfile"],
+                Route::AUTHORIZATION => false,
+            ],
+            "profile" => [
+                Route::CONTROLLER => [UserController::class, "getContentProfile"],
+                Route::AUTHORIZATION => false,
+            ],
+            "login" => [
+                Route::CONTROLLER => [UserController::class, "getContentLogin"],
+                Route::AUTHORIZATION => false,
+            ],
+            "register" => [
+                Route::CONTROLLER => [UserController::class, "getContentRegister"],
+                Route::AUTHORIZATION => false,
+            ],
+            "ajax" => [
+                "login" => [
+                    Route::CONTROLLER => [UserAjaxController::class, "getContentLogin"],
+                    Route::AUTHORIZATION => false,
+                ],
+            ],
+        ],
+        "articles" => [
+            "/" => [
                 Route::CONTROLLER => [DefaultController::class, "getContentDefault"],
                 Route::AUTHORIZATION => false,
             ],
-            "kozu" => [
+        ],
+        "news" => [
+            "/" => [
                 Route::CONTROLLER => [DefaultController::class, "getContentDefault"],
                 Route::AUTHORIZATION => false,
             ],
@@ -64,6 +93,10 @@ class RoutesConfig
      */
     public function getRoutes(): array
     {
-        return $this->routes;
+        if (Router::isKraken()) {
+            return ["~kovacjaku" => $this->routes];
+        } else {
+            return $this->routes;
+        }
     }
 }

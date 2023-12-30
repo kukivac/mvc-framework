@@ -18,6 +18,13 @@ function autoloadFunction(string $class): void
         require($classname);
     }
 }
+function getLink(string $link){
+    if (Router::isKraken()) {
+        return "/~kovacjaku".$link;
+    } else {
+        return $link;
+    }
+}
 
 spl_autoload_register("autoloadFunction");
 

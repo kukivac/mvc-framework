@@ -39,6 +39,8 @@ abstract class ViewController extends AbstractController
     public function writeView(): void
     {
         if ($this->view) {
+            $this->data['pages'] = $this->getPages();
+            $this->data['logged_in_user'] = $this->isLoggedInUser();
             echo $this->view_engine->run($this->view, $this->data);
         } else {
             throw new ControllerException("View file not selected");
@@ -73,5 +75,13 @@ abstract class ViewController extends AbstractController
     public function build(): void
     {
         $this->writeView();
+    }
+
+    private function getPages()
+    {
+        return [
+            ["link" => "/articles", "name" => "Články"],
+            ["link" => "/news", "name" => "Novinky"],
+        ];
     }
 }
