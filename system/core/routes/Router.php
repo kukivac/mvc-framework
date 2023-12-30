@@ -11,6 +11,7 @@ use system\core\exceptions\ControllerException;
 use system\core\exceptions\RoutesException;
 use system\core\helpers\Environment;
 use system\core\helpers\Format;
+use system\core\user\User;
 use system\database\Database;
 
 /**
@@ -47,13 +48,13 @@ final class Router
      */
     public function process(string $request_uri): void
     {
+        $user = $this->processUser();
         /* Database connection tryout */
         $this->testDatabaseConnection();
         /* URL Parsing */
         $this->parseURL($request_uri);
         /** Try custom routes */
         try {
-            $routes = new RoutesConfig();
             $route = $this->getRoute($this->parameters);
         } catch (RoutesException $exception) {
             $this->process("error/404");
@@ -64,6 +65,9 @@ final class Router
         $controllerClass = new $controllerName;
         $this->controller = $controllerClass;
         $this->controller->setControllerName(str_replace("Controller", "", array_reverse(explode("\\", $controllerName))[0]));
+        if ($user !== null) {
+            $this->controller->setLoggedInUser($user);
+        }
         if ($this->controller->isActive()) {
             $callback = [$controllerClass, $route->getControllerMethod()];
             if (is_callable($callback)) {
@@ -130,6 +134,14 @@ final class Router
     }
 
     /**
+     * @return bool
+     */
+    static function isKraken(): bool
+    {
+        return $_SERVER['HTTP_HOST'] === "kraken.pedf.cuni.cz";
+    }
+
+    /**
      * @param string[] $parameters
      */
     private function setParameters(array $parameters): void
@@ -147,6 +159,7 @@ final class Router
 
     /**
      * @return void
+     * @throws ControllerException
      */
     private function testDatabaseConnection(): void
     {
@@ -201,6 +214,9 @@ final class Router
             $routes = $this->routes;
         }
         $current_param = array_shift($parameters);
+        if ($current_param == null) {
+            $current_param = "/";
+        }
         $route = $routes[$current_param] ?? null;
         if ($route === null) {
             throw new RoutesException("Route " . $current_param . " could not be found.");
@@ -250,5 +266,17 @@ final class Router
                 throw new RoutesException("Routes " . $key . " specified controller, does not exist.");
             }
         }
+    }
+
+    /**
+     * @return User|null
+     */
+    private function processUser(): ?User
+    {
+        if (!array_key_exists('user', $_SESSION)) {
+            $_SESSION['user'] = null;
+        }
+
+        return $_SESSION['user'];
     }
 }

@@ -14,7 +14,8 @@
     "guzzlehttp/guzzle": "^6.5.8",
     "ext-mbstring": "*",
     "tracy/tracy": "^2.7.9",
-    "eftec/bladeone": "^4.1.3"
+    "eftec/bladeone": "^4.1.3",
+    "dibi/dibi": "^4.1"
   },
   "authors": [
     {

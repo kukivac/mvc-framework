@@ -15,13 +15,13 @@ class DbConfig
     private static $host = '127.0.0.1';
 
     /** @var string */
-    private static $username = 'root';
+    private static $username = 'kovacjaku';
 
     /** @var string */
-    private static $pass = '';
+    private static $pass = 'xHeslo123';
 
     /** @var string */
-    private static $database = 'bajerovnik';
+    private static $database = 'kovacjaku';
 
     /**
      * @var mixed[]
