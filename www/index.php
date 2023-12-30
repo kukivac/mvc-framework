@@ -22,6 +22,7 @@ function autoloadFunction(string $class): void
 spl_autoload_register("autoloadFunction");
 
 Environment::setSystemEnvironment(Environment::DEVELOPMENT);
+Environment::setUseDatabase(false);
 switch (Environment::getSystemEnvironment()) {
     case Environment::DEVELOPMENT:
         ini_set('error_reporting', E_ALL);

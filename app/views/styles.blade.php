@@ -1,1 +1,0 @@
-<link rel="stylesheet" href="styles/style.css?v={time()}" type="text/css"/>

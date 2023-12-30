@@ -22,9 +22,7 @@ class DefaultController extends ViewController
      */
     public function getContentDefault(array $query): void
     {
-        $this->head->addMeta("description", "Homepage of website");
-        $this->head->addMeta("keywords", "homepage,home");
-        $this->head->addTitle("Homepage");
+        $this->data['title'] = "Homepage";
         $this->setView('default.default');
     }
 }

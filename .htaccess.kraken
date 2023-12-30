@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+    Options -Indexes
+    RewriteEngine On
+    RewriteBase /~kovacjaku/
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule !\.(css|js|icon|zip|rar|png|jpg|gif|pdf)$ www/index.php [L]
+
+    AddType application/x-httpd-php .php .phtml
+
+    RewriteRule ^$ www/ [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !^/~kovacjaku/www/
+    RewriteRule ^(.*)$ www/$1 [L]
+</IfModule>

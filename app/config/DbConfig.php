@@ -2,7 +2,6 @@
 
 namespace app\config;
 
-use JetBrains\PhpStorm\ArrayShape;
 use PDO;
 
 /**
@@ -16,16 +15,13 @@ class DbConfig
     private static $host = '127.0.0.1';
 
     /** @var string */
-
     private static $username = 'root';
 
     /** @var string */
-
     private static $pass = '';
 
     /** @var string */
-
-    private static $database = 'mydb';
+    private static $database = 'bajerovnik';
 
     /**
      * @var mixed[]

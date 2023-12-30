@@ -1,7 +1,5 @@
-{extends '@layout.latte'}
+@extends('base')
 
-{block content}
-    <div class="error-container">
-        {include error_content}
-    </div>
-{/block}
+<div class="error-container">
+    @yield('error_content')
+</div>

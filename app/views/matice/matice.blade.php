@@ -1,19 +1,22 @@
-{extends "../@layout.latte"}
-{block content}
-    {foreach $tables as $key => $table}
-        <h2>{$key}</h2>
+@extends('base')
+
+@section('title', 'Matice')
+
+@section('content')
+    @foreach($tables as $table)
         <table>
             <tbody>
-            {foreach $table as $item}
+            @foreach($table as $item)
                 <tr>
-                    {foreach $item as $subitem}
+                    @foreach($item as $subitem)
                         <td>
-                            {$subitem}
+                            {{$subitem}}
                         </td>
-                    {/foreach}
+                    @endforeach
                 </tr>
-            {/foreach}
+            @endforeach
             </tbody>
         </table>
-    {/foreach}
-{/block}
+    @endforeach
+
+@endsection
