@@ -21,6 +21,7 @@ class DbConfig
     /** @var string */
     private static $pass = 'xHeslo123';
 
+    /** @var string */
     private static $kraken_pass = 'KraKEN-9.3.2001';
 
     /** @var string */

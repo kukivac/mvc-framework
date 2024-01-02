@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\ArticlesModel;
 use app\models\NewsModel;
+use Dibi\Exception;
 use system\core\controllers\ViewController;
 
 /**
@@ -27,6 +28,7 @@ class DefaultController extends ViewController
     /**
      * @param mixed[] $query
      * @return void
+     * @throws Exception
      */
     public function getContentDefault(array $query): void
     {

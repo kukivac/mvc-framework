@@ -125,6 +125,7 @@ final class Router
      */
     static function reroute(string $url, array $queryParameters = []): void
     {
+        $url = getLink($url);
         if (!empty($queryParameters)) {
             $url .= "?" . http_build_query($queryParameters);
         }

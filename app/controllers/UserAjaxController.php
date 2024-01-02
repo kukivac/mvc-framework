@@ -8,6 +8,7 @@ use app\classes\exceptions\UserException;
 use app\models\UserModel;
 use system\core\api\ApiResponse;
 use system\core\controllers\DataController;
+use system\core\Routes\Router;
 
 class UserAjaxController extends DataController
 {
@@ -22,6 +23,9 @@ class UserAjaxController extends DataController
 
     public function getContentLogin()
     {
+        if ($this->isLoggedInUser()) {
+            Router::reroute("/");
+        }
         if (count($_POST) > 0 && array_key_exists('username', $_POST) && array_key_exists('password', $_POST)) {
             $username = htmlspecialchars($_POST['username']);
             $password = $_POST['password'];
@@ -52,6 +56,9 @@ class UserAjaxController extends DataController
 
     public function getContentRegister()
     {
+        if ($this->isLoggedInUser()) {
+            Router::reroute("/");
+        }
         if (count($_POST) > 0 && array_key_exists('username', $_POST) && array_key_exists('firstname', $_POST) && array_key_exists('lastname', $_POST) && array_key_exists('email', $_POST) && array_key_exists('password', $_POST)) {
             $username = htmlspecialchars($_POST['username']);
             $firstname = htmlspecialchars($_POST['firstname']);
