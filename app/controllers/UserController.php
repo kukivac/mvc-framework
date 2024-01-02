@@ -20,11 +20,13 @@ class UserController extends ViewController
      */
     public function getContentProfile(array $query): void
     {
-        if (!$this->isLoggedInUser()) {
-            Router::reroute("user/login");
-        }
-        $this->assign("title", "Profile");
-        $this->setView('user.profile');
+        /** Profil už se mi nechtěl dělat */
+        Router::reroute("/");
+        //        if (!$this->isLoggedInUser()) {
+        //            Router::reroute("user/login");
+        //        }
+        //        $this->assign("title", "Profile");
+        //        $this->setView('user.profile');
     }
 
     /**
@@ -33,10 +35,12 @@ class UserController extends ViewController
      */
     public function getContentDefault(array $query): void
     {
-        if (!$this->isLoggedInUser()) {
-            Router::reroute("user/login");
-        }
-        Router::reroute("user/profile");
+        /** Profil už se mi nechtěl dělat */
+        Router::reroute("/");
+        //        if (!$this->isLoggedInUser()) {
+        //            Router::reroute("user/login");
+        //        }
+        //        Router::reroute("user/profile");
     }
 
     /**
@@ -45,6 +49,9 @@ class UserController extends ViewController
      */
     public function getContentLogin(array $query): void
     {
+        if ($this->isLoggedInUser()) {
+            Router::reroute("/");
+        }
         $this->assign("title", "Login");
         $this->setView('user.login');
     }
@@ -55,6 +62,9 @@ class UserController extends ViewController
      */
     public function getContentRegister(array $query): void
     {
+        if ($this->isLoggedInUser()) {
+            Router::reroute("/");
+        }
         $this->assign("title", "Register");
         $this->setView('user.register');
     }

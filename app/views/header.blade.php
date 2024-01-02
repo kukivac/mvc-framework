@@ -21,7 +21,8 @@
 
             <div class="d-flex">
                 @if($logged_in_user)
-                    <a href="{{getLink('/user/profile')}}" class="btn btn-outline-info me-2" type="button">Profile</a>
+{{--                    Profil už se mi nechtěl dělat--}}
+{{--                    <a href="{{getLink('/user/profile')}}" class="btn btn-outline-info me-2" type="button">Profile</a>--}}
                     <a href="{{getLink('/user/logout')}}" class="btn btn-outline-warning" type="button">Logout</a>
                 @else
                     <a href="{{getLink('/user/login')}}" class="btn btn-outline-success me-2" type="button">Login</a>

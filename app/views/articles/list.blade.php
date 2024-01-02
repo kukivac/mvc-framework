@@ -12,13 +12,16 @@
                 @endif
             </div>
             @foreach ($articles as $article)
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4 articles-article-card" article-id="{{$article->getId()}}">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $article->getTitle() }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{ $article->getCreatedAt()->format('F j, Y') }}</h6>
                             <p class="card-text">{{ $article->getDescription()}}</p>
                             <a href="{{getLink("/articles?id=".$article->getId())}}" class="btn btn-outline-primary">Read More</a>
+                            @if($is_admin)
+                                <button class="btn btn-outline-danger delete-articles-article-button" article-id="{{$article->getId()}}">Delete</button>
+                            @endif
                         </div>
                     </div>
                 </div>

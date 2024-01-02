@@ -8,7 +8,11 @@ use Tracy\Debugger;
 
 require("../vendor/autoload.php");
 
-Debugger::enable();
+if (Router::isKraken()) {
+    Debugger::enable(Debugger::PRODUCTION);
+} else {
+    Debugger::enable();
+}
 Debugger::$logDirectory = __DIR__ . '\..\log';
 function autoloadFunction(string $class): void
 {
@@ -18,9 +22,11 @@ function autoloadFunction(string $class): void
         require($classname);
     }
 }
-function getLink(string $link){
+
+function getLink(string $link)
+{
     if (Router::isKraken()) {
-        return "/~kovacjaku".$link;
+        return "/~kovacjaku" . $link;
     } else {
         return $link;
     }

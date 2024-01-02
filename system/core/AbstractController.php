@@ -83,6 +83,24 @@ abstract class AbstractController
         return $this->user instanceof User;
     }
 
+    public final function isAdmin(): bool
+    {
+        if ($this->isLoggedInUser()) {
+            return $this->user->getUserLevel()->getName() === User::ROLE_ADMIN;
+        } else {
+            return false;
+        }
+    }
+
+    public function getLoggedInUserId()
+    {
+        if ($this->isLoggedInUser()) {
+            return $this->user->getId();
+        } else {
+            return null;
+        }
+    }
+
     public final function loggoutUser()
     {
         $this->setLoggedInUser(null, true);

@@ -3,6 +3,7 @@
 namespace app\config;
 
 use PDO;
+use system\core\Routes\Router;
 
 /**
  * Config DbConfig
@@ -19,6 +20,8 @@ class DbConfig
 
     /** @var string */
     private static $pass = 'xHeslo123';
+
+    private static $kraken_pass = 'KraKEN-9.3.2001';
 
     /** @var string */
     private static $database = 'kovacjaku';
@@ -44,7 +47,11 @@ class DbConfig
 
     public static function getPass(): string
     {
-        return self::$pass;
+        if (Router::isKraken()) {
+            return self::$kraken_pass;
+        } else {
+            return self::$pass;
+        }
     }
 
     public static function getDatabase(): string
