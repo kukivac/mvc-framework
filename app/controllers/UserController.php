@@ -72,6 +72,6 @@ class UserController extends ViewController
     public function getContentLogout(array $query)
     {
         $this->loggoutUser();
-        Router::reroute(getLink("/user/login"));
+        Router::reroute("/user/login");
     }
 }

@@ -37,7 +37,7 @@ if(login_form_element)
                     if(data.hasOwnProperty("data"))
                     {
                         alert("Login was succesfull")
-                        window.location.href = getLink('/user/profile');
+                        window.location.href = getLink('/');
                     }
                     else if(data.hasOwnProperty("error"))
                     {
