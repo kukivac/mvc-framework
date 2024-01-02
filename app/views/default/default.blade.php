@@ -12,52 +12,33 @@
     <!-- Featured Articles Section -->
     <section class="container">
         <div class="row">
-            @php
-                $counter = 0;
-                /** @var \app\classes\structures\ArticleStructure $article */
-            @endphp
             @foreach($articles as $article)
-                @if ($counter == 3)
-                    @break
-                @endif
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$article->getTitle()}}</h5>
-                                <p class="card-text">{{$article->getDescription()}}</p>
-                                <a href="{{getLink("/articles?id=".$article->getId())}}" class="btn btn-primary">Read More</a>
-                            </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$article->getTitle()}}</h5>
+                            <p class="card-text">{{$article->getDescription()}}</p>
+                            <a href="{{getLink("/articles?id=".$article->getId())}}" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
+                </div>
             @endforeach
-            @php
-                $counter++;
-            @endphp
         </div>
     </section>
     <section class="bg-light py-5">
         <div class="container">
             <h2 class="text-center mb-4">Latest News</h2>
             <div class="row">
-                @php
-                    $counter = 0;
-                    /** @var \app\classes\structures\NewsStructure $news_article */
-                @endphp
                 @foreach($news_articles as $news_article)
-                    @if ($counter == 2)
-                        @break
-                    @endif
-                        <div class="col-md-6">
-                            <div class="news-item mb-4">
-                                <h3>{{$news_article->getTitle()}}</h3>
-                                <p>{{$news_article->getContent()}}</p>
-                                <a href="{{getLink("/news?id=".$news_article->getId())}}" class="btn btn-outline-primary">Read More</a>
-                            </div>
+
+                    <div class="col-md-6">
+                        <div class="news-item mb-4">
+                            <h3>{{$news_article->getTitle()}}</h3>
+                            <p>{{$news_article->getContent()}}</p>
+                            <a href="{{getLink("/news?id=".$news_article->getId())}}" class="btn btn-outline-primary">Read More</a>
                         </div>
+                    </div>
                 @endforeach
-                @php
-                    $counter++;
-                @endphp
             </div>
         </div>
     </section>

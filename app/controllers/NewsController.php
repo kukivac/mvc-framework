@@ -6,6 +6,7 @@ namespace app\controllers;
 
 use app\models\NewsModel;
 use system\core\controllers\ViewController;
+use system\core\Routes\Router;
 
 class NewsController extends ViewController
 {
@@ -22,6 +23,8 @@ class NewsController extends ViewController
         if (array_key_exists("id", $query) && is_numeric($query["id"])) {
             $this->getContentNewsArticle(intval($query["id"]));
         } else {
+            $news_articles = $this->news_model->getlist();
+            $this->assign("news_articles", $news_articles);
             $this->setView("news.list");
         }
     }
@@ -31,5 +34,13 @@ class NewsController extends ViewController
         $news_article = $this->news_model->getNewsArticle($id);
         $this->assign("news_article", $news_article);
         $this->setView("news.article");
+    }
+
+    public function getContentCreateNewsArticle(array $query)
+    {
+        if (!$this->isAdmin()) {
+            Router::reroute("news");
+        }
+        $this->setView("news.add");
     }
 }

@@ -41,6 +41,7 @@ abstract class ViewController extends AbstractController
         if ($this->view) {
             $this->assign("pages",$this->getPages());
             $this->assign("logged_in_user", $this->isLoggedInUser());
+            $this->assign("is_admin",$this->isAdmin());
             echo $this->view_engine->run($this->view, $this->data);
         } else {
             throw new ControllerException("View file not selected");

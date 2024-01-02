@@ -30,8 +30,8 @@ class DefaultController extends ViewController
      */
     public function getContentDefault(array $query): void
     {
-        $news_articles = $this->news_model->getlist();
-        $articles = $this->articles_model->getlist();
+        $news_articles = $this->news_model->getlist(2);
+        $articles = $this->articles_model->getlist(3);
         $this->assign('title', "Homepage");
         $this->assign("news_articles", $news_articles);
         $this->assign("articles", $articles);

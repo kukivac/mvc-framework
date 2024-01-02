@@ -2,10 +2,12 @@
 
 namespace app\config;
 
+use app\controllers\ArticlesAjaxController;
 use app\controllers\ArticlesController;
 use app\controllers\DefaultController;
 use app\controllers\ErrorController;
 use app\controllers\MaticeController;
+use app\controllers\NewsAjaxController;
 use app\controllers\NewsController;
 use app\controllers\UserAjaxController;
 use app\controllers\UserController;
@@ -63,15 +65,39 @@ class RoutesConfig
                 Route::CONTROLLER => [ArticlesController::class, "getContentDefault"],
                 Route::AUTHORIZATION => false,
             ],
-            "add"=>[
+            "add" => [
                 Route::CONTROLLER => [ArticlesController::class, "getContentCreateArticle"],
                 Route::AUTHORIZATION => false,
-            ]
+            ],
+            "ajax" => [
+                "add" => [
+                    Route::CONTROLLER => [ArticlesAjaxController::class, "getContentCreateArticle"],
+                    Route::AUTHORIZATION => false,
+                ],
+                "delete" => [
+                    Route::CONTROLLER => [ArticlesAjaxController::class, "getContentDeleteArticle"],
+                    Route::AUTHORIZATION => false,
+                ],
+            ],
         ],
         "news" => [
             "/" => [
                 Route::CONTROLLER => [NewsController::class, "getContentDefault"],
                 Route::AUTHORIZATION => false,
+            ],
+            "add" => [
+                Route::CONTROLLER => [NewsController::class, "getContentCreateNewsArticle"],
+                Route::AUTHORIZATION => false,
+            ],
+            "ajax" => [
+                "add" => [
+                    Route::CONTROLLER => [NewsAjaxController::class, "getContentCreateNews"],
+                    Route::AUTHORIZATION => false,
+                ],
+                "delete" => [
+                    Route::CONTROLLER => [NewsAjaxController::class, "getContentDeleteNews"],
+                    Route::AUTHORIZATION => false,
+                ],
             ],
         ],
         "error" => [

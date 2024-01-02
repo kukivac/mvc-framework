@@ -4,17 +4,12 @@
 
 @section('content')
     <div class="container mt-4">
-        <h2 class="mb-4">Create New Article</h2>
+        <h2 class="mb-4">Create New News Article</h2>
 
-        <form id="add-article-form" method="POST">
+        <form id="add-news-article-form" method="POST">
             <div class="form-group mb-3">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" required>
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="description">Short Description</label>
-                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
             </div>
 
             <div class="form-group mb-3">

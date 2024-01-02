@@ -6,6 +6,10 @@ namespace system\core\user;
 
 class User
 {
+    public const ROLE_ADMIN = "Admin";
+    public const ROLE_EDITOR = "Editor";
+    public const ROLE_USER = "User";
+
     /** @var int|null */
     private $id;
 
