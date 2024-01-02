@@ -128,6 +128,9 @@ final class Router
         if (!empty($queryParameters)) {
             $url .= "?" . http_build_query($queryParameters);
         }
+        if (substr($url, 0, 1) === '/') {
+            $url = ltrim($url, '/');
+        }
         header("Location: /$url");
         header("Connection: close");
         exit;

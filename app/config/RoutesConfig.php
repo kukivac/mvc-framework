@@ -2,9 +2,11 @@
 
 namespace app\config;
 
+use app\controllers\ArticlesController;
 use app\controllers\DefaultController;
 use app\controllers\ErrorController;
 use app\controllers\MaticeController;
+use app\controllers\NewsController;
 use app\controllers\UserAjaxController;
 use app\controllers\UserController;
 use system\core\Routes\Route;
@@ -41,22 +43,34 @@ class RoutesConfig
                 Route::CONTROLLER => [UserController::class, "getContentRegister"],
                 Route::AUTHORIZATION => false,
             ],
+            "logout" => [
+                Route::CONTROLLER => [UserController::class, "getContentLogout"],
+                Route::AUTHORIZATION => false,
+            ],
             "ajax" => [
                 "login" => [
                     Route::CONTROLLER => [UserAjaxController::class, "getContentLogin"],
+                    Route::AUTHORIZATION => false,
+                ],
+                "register" => [
+                    Route::CONTROLLER => [UserAjaxController::class, "getContentRegister"],
                     Route::AUTHORIZATION => false,
                 ],
             ],
         ],
         "articles" => [
             "/" => [
-                Route::CONTROLLER => [DefaultController::class, "getContentDefault"],
+                Route::CONTROLLER => [ArticlesController::class, "getContentDefault"],
                 Route::AUTHORIZATION => false,
             ],
+            "add"=>[
+                Route::CONTROLLER => [ArticlesController::class, "getContentCreateArticle"],
+                Route::AUTHORIZATION => false,
+            ]
         ],
         "news" => [
             "/" => [
-                Route::CONTROLLER => [DefaultController::class, "getContentDefault"],
+                Route::CONTROLLER => [NewsController::class, "getContentDefault"],
                 Route::AUTHORIZATION => false,
             ],
         ],

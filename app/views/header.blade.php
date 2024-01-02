@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand" href="{{getLink('/')}}">
@@ -21,10 +21,10 @@
 
             <div class="d-flex">
                 @if($logged_in_user)
-                    <a href="{{getLink('/user/profile')}}" class="btn btn-outline-info" type="button">Profile</a>
+                    <a href="{{getLink('/user/profile')}}" class="btn btn-outline-info me-2" type="button">Profile</a>
                     <a href="{{getLink('/user/logout')}}" class="btn btn-outline-warning" type="button">Logout</a>
                 @else
-                    <a href="{{getLink('/user/login')}}" class="btn btn-outline-success" type="button">Login</a>
+                    <a href="{{getLink('/user/login')}}" class="btn btn-outline-success me-2" type="button">Login</a>
                     <a href="{{getLink('/user/register')}}" class="btn btn-outline-primary" type="button">Register</a>
                 @endif
             </div>

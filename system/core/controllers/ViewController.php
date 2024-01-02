@@ -11,7 +11,7 @@ abstract class ViewController extends AbstractController
     /**
      * @var mixed[] $data
      */
-    protected $data = [];
+    private $data = [];
 
     /**
      * @var string $view
@@ -39,8 +39,8 @@ abstract class ViewController extends AbstractController
     public function writeView(): void
     {
         if ($this->view) {
-            $this->data['pages'] = $this->getPages();
-            $this->data['logged_in_user'] = $this->isLoggedInUser();
+            $this->assign("pages",$this->getPages());
+            $this->assign("logged_in_user", $this->isLoggedInUser());
             echo $this->view_engine->run($this->view, $this->data);
         } else {
             throw new ControllerException("View file not selected");
@@ -80,8 +80,18 @@ abstract class ViewController extends AbstractController
     private function getPages()
     {
         return [
-            ["link" => "/articles", "name" => "Články"],
-            ["link" => "/news", "name" => "Novinky"],
+            ["link" => "/articles", "name" => "Articles"],
+            ["link" => "/news", "name" => "News"],
         ];
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return void
+     */
+    public function assign(string $key, $value)
+    {
+        $this->data[$key] = $value;
     }
 }
