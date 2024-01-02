@@ -9,9 +9,9 @@ use system\core\Routes\Router;
 
 class UserController extends ViewController
 {
-    public function __construct()
+    public function __construct(bool $active = true)
     {
-        parent::__construct();
+        parent::__construct($active);
     }
 
     /**
@@ -23,7 +23,7 @@ class UserController extends ViewController
         if (!$this->isLoggedInUser()) {
             Router::reroute("user/login");
         }
-        $this->data['title'] = "Login";
+        $this->assign("title", "Profile");
         $this->setView('user.profile');
     }
 
@@ -45,7 +45,7 @@ class UserController extends ViewController
      */
     public function getContentLogin(array $query): void
     {
-        $this->data['title'] = "Login";
+        $this->assign("title", "Login");
         $this->setView('user.login');
     }
 
@@ -55,7 +55,13 @@ class UserController extends ViewController
      */
     public function getContentRegister(array $query): void
     {
-        $this->data['title'] = "Register";
+        $this->assign("title", "Register");
         $this->setView('user.register');
+    }
+
+    public function getContentLogout(array $query)
+    {
+        $this->loggoutUser();
+        Router::reroute(getLink("/user/login"));
     }
 }

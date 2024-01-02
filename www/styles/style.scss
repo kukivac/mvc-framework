@@ -1,1 +1,10 @@
 @import "root";
+
+body > main > section.container > div > div > div > div > p,
+body > main > section.bg-light.py-5 > div > div > div > div > p,
+body > main > div > div > div > div > div > p{
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

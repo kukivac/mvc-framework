@@ -11,9 +11,9 @@ use system\core\controllers\ViewController;
  */
 class ErrorController extends ViewController
 {
-    public function __construct()
+    public function __construct(bool $active = true)
     {
-        parent::__construct();
+        parent::__construct($active);
     }
 
     public function error400(): void

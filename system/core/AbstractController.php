@@ -83,6 +83,11 @@ abstract class AbstractController
         return $this->user instanceof User;
     }
 
+    public final function loggoutUser()
+    {
+        $this->setLoggedInUser(null, true);
+    }
+
     /**
      * Convert standard names to dash-based style
      *

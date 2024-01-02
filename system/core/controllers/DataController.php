@@ -22,4 +22,9 @@ abstract class DataController extends AbstractController
     {
         $this->response->render();
     }
+
+    public function setResponse(?ApiResponse $response): void
+    {
+        $this->response = $response;
+    }
 }

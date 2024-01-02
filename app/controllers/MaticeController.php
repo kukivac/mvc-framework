@@ -11,9 +11,9 @@ use system\core\controllers\ViewController;
  */
 class MaticeController extends ViewController
 {
-    public function __construct()
+    public function __construct(bool $active = true)
     {
-        parent::__construct();
+        parent::__construct($active);
     }
 
     /**
@@ -48,7 +48,7 @@ class MaticeController extends ViewController
         $tables["Neseřazená"] = $matice;
         $tables["Seřazená"] = $sortedArray;
 
-        $this->data["tables"] = $tables;
+        $this->assign("tables", $tables);
         $this->setView('matice.matice');
     }
 }

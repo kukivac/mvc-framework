@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\ArticlesModel;
+use app\models\NewsModel;
 use system\core\controllers\ViewController;
 
 /**
@@ -11,9 +13,15 @@ use system\core\controllers\ViewController;
  */
 class DefaultController extends ViewController
 {
-    public function __construct()
+    protected $articles_model;
+
+    protected $news_model;
+
+    public function __construct(bool $active = true)
     {
-        parent::__construct();
+        parent::__construct($active);
+        $this->articles_model = new ArticlesModel();
+        $this->news_model = new NewsModel();
     }
 
     /**
@@ -22,7 +30,11 @@ class DefaultController extends ViewController
      */
     public function getContentDefault(array $query): void
     {
-        $this->data['title'] = "Homepage";
+        $news_articles = $this->news_model->getlist();
+        $articles = $this->articles_model->getlist();
+        $this->assign('title', "Homepage");
+        $this->assign("news_articles", $news_articles);
+        $this->assign("articles", $articles);
         $this->setView('default.default');
     }
 }

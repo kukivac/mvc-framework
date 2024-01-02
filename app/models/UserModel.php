@@ -24,7 +24,7 @@ class UserModel extends Model
      * @throws \Exception
      * @throws UserException
      */
-    public function checkUsersPassword(string $username, string $password): void
+    public function loginUser(string $username, string $password): void
     {
         if (!$this->checkUserExistsByUsername($username)) {
             throw new UserException("User does not exist", UserException::USER_NOT_FOUND);
@@ -51,6 +51,18 @@ class UserModel extends Model
     }
 
     /**
+     * @param string $email
+     * @return bool
+     * @throws Exception
+     */
+    private function checkUserExistsByEmail(string $email): bool
+    {
+        $result = $this->getDatabaseConnection()->query("SELECT * FROM users WHERE email = %s", $email);
+
+        return $result->count() === 1;
+    }
+
+    /**
      * @param string $username
      * @return User
      * @throws Exception
@@ -71,5 +83,24 @@ class UserModel extends Model
         $user->setUserLevel($user_level);
 
         return $user;
+    }
+
+    /**
+     * @param string $username
+     * @param string $firstname
+     * @param string $lastname
+     * @param string $email
+     * @param string $password
+     * @return void
+     * @throws Exception
+     * @throws UserException
+     */
+    public function registerUser(string $username, string $firstname, string $lastname, string $email, string $password)
+    {
+        if ($this->checkUserExistsByUsername($username) && $this->checkUserExistsByEmail($email)) {
+            throw new UserException("User already exists", UserException::USER_ALREADY_EXISTS);
+        }
+        $statement = $this->getDatabaseConnection()->translate('INSERT INTO users(username,email,firstname,lastname,password, userlevel_id) VALUES (%s,%s,%s,%s,%s, (SELECT id FROM userlevel WHERE name = "User"))', $username, $email, $firstname, $lastname, $password);
+        $this->getDatabaseConnection()->query($statement);
     }
 }
