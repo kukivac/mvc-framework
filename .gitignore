@@ -7,3 +7,4 @@ package-lock.json
 /tmp
 *.css
 *.css.map
+app/config/DbConfig.php

@@ -8,7 +8,7 @@ use app\classes\exceptions\UserException;
 use app\models\UserModel;
 use system\core\api\ApiResponse;
 use system\core\controllers\DataController;
-use system\core\Routes\Router;
+use system\core\routes\Router;
 
 class UserAjaxController extends DataController
 {

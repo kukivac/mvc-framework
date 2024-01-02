@@ -3,7 +3,7 @@
 ini_set('memory_limit', '-1');
 
 use system\core\helpers\Environment;
-use system\core\Routes\Router;
+use system\core\routes\Router;
 use Tracy\Debugger;
 
 require("../vendor/autoload.php");

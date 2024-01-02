@@ -11,8 +11,8 @@ use app\controllers\NewsAjaxController;
 use app\controllers\NewsController;
 use app\controllers\UserAjaxController;
 use app\controllers\UserController;
-use system\core\Routes\Route;
-use system\core\Routes\Router;
+use system\core\routes\Route;
+use system\core\routes\Router;
 
 class RoutesConfig
 {

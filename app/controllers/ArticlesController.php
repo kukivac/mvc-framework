@@ -6,7 +6,7 @@ namespace app\controllers;
 
 use app\models\ArticlesModel;
 use system\core\controllers\ViewController;
-use system\core\Routes\Router;
+use system\core\routes\Router;
 
 class ArticlesController extends ViewController
 {

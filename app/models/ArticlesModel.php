@@ -9,7 +9,7 @@ use app\classes\structures\ArticleStructure;
 use Dibi\Exception;
 use Dibi\Result;
 use system\core\model\Model;
-use system\core\Routes\Router;
+use system\core\routes\Router;
 
 class ArticlesModel extends Model
 {

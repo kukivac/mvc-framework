@@ -9,7 +9,7 @@ use app\classes\structures\NewsStructure;
 use Dibi\Exception;
 use Dibi\Result;
 use system\core\model\Model;
-use system\core\Routes\Router;
+use system\core\routes\Router;
 
 class NewsModel extends Model
 {

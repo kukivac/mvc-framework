@@ -1,6 +1,6 @@
 <?php
 
-namespace system\core\Routes;
+namespace system\core\routes;
 
 require(__DIR__ . "/../../../vendor/autoload.php");
 

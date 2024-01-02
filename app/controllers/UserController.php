@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace app\controllers;
 
 use system\core\controllers\ViewController;
-use system\core\Routes\Router;
+use system\core\routes\Router;
 
 class UserController extends ViewController
 {
